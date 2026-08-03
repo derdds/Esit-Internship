@@ -1,0 +1,16 @@
+Item,Subsystem,Component,Description,Quantity
+1,Microcontroller,ESP32-S3-N16R8,"Core logic, WiFi/BLE, PlatformIO firmware",1
+2,Power Regulation (Logic),TS3552CS,Synchronous Buck Converter (16.4V to 5V/3.3V) for ESP32 logic,1
+3,Power Regulation (Motor/Load),TS3552CS,Synchronous Buck Converter (16.4V to 5V) for noisy loads (isolation),1
+4,Power Source,4S Li-ion pack,16.4V main system battery,1
+5,Battery Monitoring (ADC),Resistor Divider (100kΩ/20kΩ approx.),Scales 16.4V down to <3.3V for ESP32 ADC pin,1
+6,Battery Monitoring (Switch),P-Channel MOSFET (High-side switch),Isolates the voltage divider to prevent parasitic battery drain during sleep,1
+7,Sensors,Nice EPMOR Reflective Photocell,Industrial gate photocell for reliable IR line-of-sight (isolated dry relay contact to ESP32),1
+8,Actuator Control,AO3400A (or AOD454A) Logic-Level N-Channel MOSFET,Replaces Darlington array; switches 0.6A motor efficiently with low Rds(on),1
+9,Deterrent Mechanism,0.6A DC Water Pump/Motor,Automated payload actuator,1
+10,Motor Protection,1N5819 or SS14 Schottky Diode,Flyback diode in parallel with motor to suppress inductive kickback,1
+11,Decoupling/Bypass,10µF X7R MLCC,Bulk decoupling for buck converters and ESP32 VDD,Multiple
+12,Decoupling/Bypass,0.1µF X7R MLCC,High-frequency bypass for buck converters and ESP32 VDD,Multiple
+13,Connectors,"Wago 256-408 (5.08mm pitch, 8-pole)","Spring-cage PCB terminal blocks for secure, vibration-resistant wiring",1
+14,Hardware Debounce (Optional),74HC14 Schmitt Trigger + 10kΩ Resistors + 100nF Caps,Hardware debouncing for switches (Alternative: Use software debounce),1
+15,LED Driver,ULN2003,Driving the complete LED arrays,2
