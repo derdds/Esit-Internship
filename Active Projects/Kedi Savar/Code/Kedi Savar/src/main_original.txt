@@ -1,0 +1,156 @@
+#include <Arduino.h>
+#include <esp_sleep.h>
+#include "pins.h"
+
+enum class MainMode {
+  Standby,
+  Calibration,
+  Firing,
+  Display,
+};
+
+enum class ButtonEvent {
+  None,
+  ShortPress,
+  LongPress,
+};
+
+MainMode currentMode = MainMode::Standby;
+unsigned long lastActivityMs = 0;
+
+// These functions are the boundaries for the mode-specific source files.
+void initializeHardware();
+void restorePersistentState();
+void handleWakeReason();
+void handleButtons();
+void runStandbyMode();
+void runCalibrationMode();
+void runFiringMode();
+void runDisplayMode();
+void savePersistentState();
+void enterDeepSleep();
+void testHardware();
+
+void setup() {
+  initializeHardware();
+  restorePersistentState();
+  handleWakeReason();
+  lastActivityMs = millis();
+  testHardware();
+}
+
+void loop() {
+  handleButtons();
+
+  switch (currentMode) {
+    case MainMode::Standby:
+      runStandbyMode();
+      break;
+    case MainMode::Calibration:
+      runCalibrationMode();
+      break;
+    case MainMode::Firing:
+      runFiringMode();
+      break;
+    case MainMode::Display:
+      runDisplayMode();
+      break;
+  }
+
+  if (millis() - lastActivityMs >= standbyTimeoutMs) {
+    savePersistentState();
+    enterDeepSleep();
+  }
+}
+
+void initializeHardware() {
+  pinMode(Pins::relayTrigger, INPUT);
+  pinMode(Pins::switch7, INPUT);
+  pinMode(Pins::switch6, INPUT);
+  pinMode(Pins::switch5, INPUT);
+  pinMode(Pins::switch4, INPUT);
+  pinMode(Pins::switch3, INPUT);
+  pinMode(Pins::switch2, INPUT);
+  pinMode(Pins::switch1, INPUT);
+  pinMode(Pins::batteryAdc, INPUT);
+
+  pinMode(Pins::gunPower, OUTPUT);
+  pinMode(Pins::buzzer, OUTPUT);
+  pinMode(Pins::leftGun, OUTPUT);
+  pinMode(Pins::rightGun, OUTPUT);
+
+  digitalWrite(Pins::gunPower, LOW);
+  digitalWrite(Pins::buzzer, LOW);
+  digitalWrite(Pins::leftGun, LOW);
+  digitalWrite(Pins::rightGun, LOW);
+
+  for (unsigned char pin : Pins::statusLeds) {
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, Pins::LED_OFF);
+  }
+
+  for (unsigned char pin : Pins::segmentPins) {
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, Pins::LED_OFF);
+  }
+}
+
+void restorePersistentState() {
+  // TODO: Load armed state, gun enable state, counters, and 24-hour history.
+}
+
+void handleWakeReason() {
+  const esp_sleep_wakeup_cause_t wakeCause = esp_sleep_get_wakeup_cause();
+
+  if (wakeCause == ESP_SLEEP_WAKEUP_EXT1 && ::digitalRead(Pins::relayTrigger) == HIGH) {
+    currentMode = MainMode::Firing;
+  } else {
+    currentMode = MainMode::Standby;
+  }
+}
+
+void handleButtons() {
+  // TODO: Replace with debounced short-press and long-press events.
+  // Button actions will be delegated to the mode-specific files.
+}
+
+void runStandbyMode() {
+  // TODO: Keep guns disabled unless the persistent armed state allows testing.
+}
+
+void runCalibrationMode() {
+  // TODO: Disable guns, enable power, wait for relayTrigger to go LOW, then buzz.
+}
+
+void runFiringMode() {
+  // TODO: Alternate enabled guns for five cycles, capped at ten seconds.
+  // Stop immediately when relayTrigger goes LOW, then return to deep sleep.
+}
+
+void runDisplayMode() {
+  // TODO: Display the activation count or battery ADC value on the 7-segment display.
+}
+
+void savePersistentState() {
+  // TODO: Store armed state, gun settings, activation count, and event history.
+}
+
+void enterDeepSleep() {
+  digitalWrite(Pins::gunPower, LOW);
+  digitalWrite(Pins::buzzer, LOW);
+  digitalWrite(Pins::leftGun, LOW);
+  digitalWrite(Pins::rightGun, LOW);
+
+  const unsigned long long wakeMask =
+      (1ULL << Pins::relayTrigger) |
+      (1ULL << Pins::switch7) |
+      (1ULL << Pins::switch6) |
+      (1ULL << Pins::switch5) |
+      (1ULL << Pins::switch4) |
+      (1ULL << Pins::switch3) |
+      (1ULL << Pins::switch2) |
+      (1ULL << Pins::switch1);
+
+  ::esp_sleep_enable_ext1_wakeup(wakeMask, ESP_EXT1_WAKEUP_ANY_HIGH);
+  esp_deep_sleep_start();
+}
