@@ -2,4 +2,5 @@
 	(version 7)
 	(lib (name "Electrical") (type "KiCad") (uri "C:/Users/quick/Desktop/Esit-Intership/03.08.26 Evening/Active Projects/Kedi Savar/Electrical.pretty") (options "") (descr ""))
 	(lib (name "Can foot") (type "KiCad") (uri "C:/Users/quick/Desktop/Esit-Intership/03.08.26 Evening/Active Projects/Kedi Savar/Electrical/Can foot.pretty") (options "") (descr ""))
+	(lib (name "Can foot") (type "KiCad") (uri "C:/Users/User/Desktop/Esit Internship/active projects/Kedi Savar/Electrical/Can foot.pretty") (options "") (descr ""))
 )
