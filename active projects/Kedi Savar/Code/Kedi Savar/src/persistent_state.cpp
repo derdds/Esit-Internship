@@ -1,0 +1,55 @@
+#include <Preferences.h>
+#include <Arduino.h>
+#include <cstring>
+#include "persistent_state.h"
+
+PersistentState persistentState = {
+  false,
+  false,
+  false,
+  0,
+  {},
+};
+
+void restorePersistentState() {
+  Preferences preferences;
+
+  if (!preferences.begin("kedi-savar", true)) {
+    return;
+  }
+
+  persistentState.armed = preferences.getBool("armed", false);
+  persistentState.leftGunEnabled = preferences.getBool("left-gun", false);
+  persistentState.rightGunEnabled = preferences.getBool("right-gun", false);
+  persistentState.activationCount = preferences.getUInt("activations", 0);
+
+  const size_t historyBytes = preferences.getBytes(
+      "history", persistentState.hourlyActivations,
+      sizeof(persistentState.hourlyActivations));
+  if (historyBytes != sizeof(persistentState.hourlyActivations)) {
+    std::memset(persistentState.hourlyActivations, 0,
+                sizeof(persistentState.hourlyActivations));
+  }
+
+  preferences.end();
+}
+
+void savePersistentState() {
+  Preferences preferences;
+  if (!preferences.begin("kedi-savar", false)) return;
+  preferences.putBool("armed", persistentState.armed);
+  preferences.putBool("left-gun", persistentState.leftGunEnabled);
+  preferences.putBool("right-gun", persistentState.rightGunEnabled);
+  preferences.putUInt("activations", persistentState.activationCount);
+  preferences.putBytes("history", persistentState.hourlyActivations,
+                       sizeof(persistentState.hourlyActivations));
+  preferences.end();
+}
+
+void recordActivation() {
+  ++persistentState.activationCount;
+  const unsigned char hour = (millis() / 3600000UL) % persistentHistoryHours;
+  if (persistentState.hourlyActivations[hour] != UINT16_MAX)
+    ++persistentState.hourlyActivations[hour];
+  savePersistentState();
+}
