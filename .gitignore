@@ -1,0 +1,33 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
+venv/
+env/
+__pycache__/
+
+# Build files
+bin/
+obj/
+dist/
+build/
+
+# Environment files (secrets)
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.log
+.cache/
+
+# Backups folder (has its own .gitignore)
+backups/

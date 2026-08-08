@@ -1,0 +1,25 @@
+Reference,Original Value,Ozdisan Part Name,Link,Datasheet,Summary
+"C1,C2,C3,C4,C5,C6,C7",100nF,Yageo 100nF 0805 X7R (Generic),https://www.ozdisan.com/p/SMT-SMD-and-MLCC-Capacitors-184,N/A,100nF 0805 Ceramic Capacitor
+"C8,C9",22uF / 25v,KEMET CAP.TANTAL 22uF 25V,https://www.ozdisan.com/en/ps/tantalum-capacitors-178,N/A,22uF 25V SMD Tantalum/Ceramic Capacitor
+"C10,C12",0.1uF,Yageo 100nF 0805 X7R (Generic),https://www.ozdisan.com/p/SMT-SMD-and-MLCC-Capacitors-184,N/A,100nF (0.1uF) 0805 Ceramic Capacitor
+"C11,C13",3.3nF,Yageo 3.3nF 0805 X7R (Generic),https://www.ozdisan.com/p/SMT-SMD-and-MLCC-Capacitors-184,N/A,3.3nF 0805 Ceramic Capacitor
+"C14,C15,C16,C18",10uF / 35-50v,KEMET CAP.TANTAL 10uF 35V D CASE,https://www.ozdisan.com/en/ps/tantalum-capacitors-178,N/A,10uF 35V SMD Tantalum Capacitor
+"C17,C19",10nF,YAGEO CC0805KPX7R9BB103,https://www.ozdisan.com/p/SMT-SMD-and-MLCC-Capacitors-184/yageo-cc0805kpx7r9bb103-524578,N/A,MLCC (2012) 0805 10nF 50VDC ±10% X7R
+"D1,D2,D3,D4",SS14,JIAQI SS14-SMA-N-JQ,https://www.ozdisan.com/en/ps/schottky-diodes-385,https://cdn.ozdisan.com/public/product/assets/TAIWAN%20SEMIC_SS12H%20SERIES_B2305.pdf,DIODE SCHOTTKY 1A 40V DO214AC (SMA)
+"D5,D6,D7",LED,INFOREC LED XC-0805YVC,https://www.ozdisan.com/en/p/led-signal-color-361/inforec-led-xc-0805yvc-349097,N/A,LED SMD 0805 YELLOW 100mcd 120° WATER CLEAR
+J1,Conn_02x20_Odd_Even,KLS ELECTRONIC L-KLS1-207-2-40-S-3X10,https://www.ozdisan.com/p/pin-headerlar-293/kls-electronic-l-kls1-207-2-40-s-3x10-458436,N/A,PIN HEADER 40PIN (2x20) 2.54mm THT V/T
+J2,Screw_Terminal_01x10,DEGSON DG246-5.08-10P-14-00AH,https://www.ozdisan.com/en/p/pcb-terminal-blocks-410/degson-dg246-5-08-10p-14-00ah-735974,N/A,TERM.BLK. 5.08MM 10P PCB SPRING-PRINT TYPE GREEN
+"L1,L2",22uH,CORE MASTER SRI1004-220M,https://www.ozdisan.com/en/p/fixed-inductors-468/core-master-sri1004-220m-527910,N/A,INDUCTOR POWER 22UH 10X10MM SMD 3A
+"Q1,Q2,Q3",AO3400A,ALPHA&OMEGA AO3400A,https://www.ozdisan.com/en/p/discrete-mosfets-435/alphaomega-ao3400a-736346,http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf,MOSFET DIS.5.7A 30V N-CH SOT23 SMT
+"R1,R3,R5,R7,R9,R11,R13,R29,R30,R31,R32,R33,R35",10k,VISHAY TNPW080510K0 (Generic),https://www.ozdisan.com/ps/smt-smd-and-chip-resistors-194,https://www.vishay.com/docs/28758/tnpw_e3.pdf,Resistor 0805 10k Ohm SMD
+"R2,R4,R6,R8,R10,R12,R14,R42",1k,VISHAY TNPW08051K00 (Generic),https://www.ozdisan.com/ps/smt-smd-and-chip-resistors-194,https://www.vishay.com/docs/28758/tnpw_e3.pdf,Resistor 0805 1k Ohm SMD
+"R15,R16,R17,R18,R19,R20,R21,R22,R23,R24,R25,R26,R43,R44",330,VISHAY TNPW0805330R (Generic),https://www.ozdisan.com/ps/smt-smd-and-chip-resistors-194,https://www.vishay.com/docs/28758/tnpw_e3.pdf,Resistor 0805 330 Ohm SMD
+R27,470,VISHAY TNPW0805470R (Generic),https://www.ozdisan.com/ps/smt-smd-and-chip-resistors-194,https://www.vishay.com/docs/28758/tnpw_e3.pdf,Resistor 0805 470 Ohm SMD
+"R28,R34",44.2k,VISHAY TNPW080544K2FHTA,https://www.ozdisan.com/en/p/smt-smd-and-chip-resistors-194/vishay-tnpw080544k2fhta-1455500,https://www.vishay.com/docs/28758/tnpw_e3.pdf,RES.(2012) 0805 44.2K Ohms 0.5% 1/8W 25ppm AECQ200
+"R36,R37,R38",220,VISHAY TNPW0805220R (Generic),https://www.ozdisan.com/ps/smt-smd-and-chip-resistors-194,https://www.vishay.com/docs/28758/tnpw_e3.pdf,Resistor 0805 220 Ohm SMD
+"R39,R40",2.2k,YAGEO AR0805FR-072K2L / ROYALOHM AS05W2J0222T5E,https://www.ozdisan.com/en/p/smt-smd-and-chip-resistors-194/yageo-ar0805fr-072k2l-790983,N/A,RES 0805 2.2K Ohms 1% 1/8W
+R41,100k,VISHAY TNPW0805100K (Generic),https://www.ozdisan.com/ps/smt-smd-and-chip-resistors-194,https://www.vishay.com/docs/28758/tnpw_e3.pdf,Resistor 0805 100k Ohm SMD
+"TP1,TP2,TP3,TP4",TestPoint,Generic SMD Test Point,N/A,N/A,Test Point Pad 1.5x1.5mm
+"U1,U2",ULN2003A,STM ULN2003A,https://www.ozdisan.com/p/sira-transistor-entegreler-240/stm-uln2003a-603053,http://www.ti.com/lit/ds/symlink/uln2003a.pdf,IC-2003 PWR RELAY 7NPN 1:1 16DIP (Note: Check SOIC-16 availability)
+U3,AQY212GZS,Panasonic AQY212GZS (Not listed on Ozdisan),N/A,N/A,PhotoMOS Relay SO-4 (May need to source elsewhere)
+"U4,U5",TS3552CS,TSC TS3552CS RLG,https://www.ozdisan.com/en/p/dc-dc-voltaj-kontrolorleri-274/tsc-ts3552cs-rlg-1211031?catSequenceId=274,N/A,IC DC-DC CONVERTER SMD 2A/350kHz TS3552 SOP8

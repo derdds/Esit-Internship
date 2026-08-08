@@ -1,0 +1,31 @@
+{/* Reason: Generates the requested downloadable CSV file via markdown code block (can be saved as .csv). Formatted for easy copy-pasting into Excel/Sheets. */}
+Item,Category,Description,Specs,Qty (Per System),Estimated Unit Price (TRY),Usage Note
+P-1,Enclosure,Çetinkaya AP-20 (203013) Polyester Enclosure,200x300x130mm Transparent Cover,1,750.00,Main Control Panel Enclosure
+P-2,Enclosure,Çetinkaya AP-06 (304020) Polyester Enclosure,300x400x200mm Opaque Cover,1 per barrel,1890.00,Local Barrel Box
+T1-1,Safety/Power,Chint NXB-63S 3P C63 Breaker,3-Phase 63A C-Curve 4.5kA,1,450.00,Main 380V Isolation (AP-20)
+T1-2,Safety/Power,Siemens 5SV3346-6 Leakage Relay,4P 63A 30mA Type A,1,2700.00,Pulse-DC safe earth leakage protection
+T1-3,Safety/Power,LS Electric MC-63A Contactor,3-Pole 63A 220V Coil,1,2470.00,Master E-Stop Isolation (AP-20)
+T1-4,Safety/Power,1P C6 Miniature Circuit Breaker,1-Pole 6A C-Curve,1,150.00,220V Logic Sub-Breaker (AP-20)
+T1-5,Safety/Power,22mm Latching E-Stop Button,Red Mushroom Head NC Contact,1,180.00,Emergency Power Cut (AP-20 Panel Door)
+T1-6,Safety/Power,Brass PE Grounding Busbar,DIN-Rail Mount Earth Terminal,1,100.00,Common Earth Bonding (AP-20)
+T1-7,Safety/Power,Auxiliary Contact Block (for LS MC-63A),1NO+1NC Top Mount,1,150.00,Feeds contactor state to ESP32 PID
+L-1,Logic/Control,ESP32-WROOM-32 DevKitV1,30-Pin Type-C Module,1,260.00,Central Processor (AP-20)
+L-2,Logic/Control,MCP23017-E/SP I/O Expander,DIP-28 16-Bit I2C,1,80.00,Expands ESP32 I/O pins (AP-20)
+L-3,Logic/Control,20x4 Character LCD + I2C Backpack,Blue/Yellow 5V Address 0x27,1,240.00,Main Dashboard UI (AP-20 Panel Door)
+L-4,Logic/Control,5V Optocoupled Relay Module,1-Channel 220V Switching,1,75.00,Fires Main Contactor Coil from ESP32
+L-5,Logic/Control,Mean Well HDR-30-5 Power Supply,220VAC to 5VDC DIN Rail 3A,1,500.00,Clean 5V Logic Power (AP-20)
+U-1,UI/Input,EC11 Rotary Encoder with Switch,5-Pin 20-pulse D-shaft,1,45.00,Menu Navigation Dial (AP-20 Panel Door)
+U-2,UI/Input,12mm Waterproof Push Button (Green),NO Contact IP65,1,30.00,Launch/Start Button (AP-20 Panel Door)
+U-3,UI/Input,12mm Waterproof Push Button (Red),NO Contact IP65,1,30.00,Stop/Pause Button (AP-20 Panel Door)
+C-1,Wiring,CAT6 FTP/STP Shielded Cable,100m Roll,1,1375.00,CRITICAL: Use for all 5V sensor/display runs
+H-1,Barrel Heating,3-Phase 40A SSR (SSR-3/032-40A),3-32VDC In 24-380VAC Out,1 per barrel,850.00,Replaces 3x single SSRs; Prevents melting
+H-2,Barrel Heating,Multi-Channel SSR Heatsink,Heavy Aluminum Fin + Thermal Paste,1 per barrel,300.00,Mounts under 3-Phase SSR (AP-06)
+H-3,Barrel Heating,3-Pole AC Contactor (25A),25A AC-1 220V Coil,1 per barrel,800.00,Local Capillary Safety Cutoff (AP-06)
+H-4,Barrel Heating,Capillary Thermostat,NC Contact 30-110C,1 per barrel,250.00,Hardwired boiling protection (AP-06)
+H-5,Barrel Heating,9kW 380V Immersion Heater,1.5" or 2" BSP Thread,1 per barrel,800.00,Primary Heat Source
+S-1,Sensors,DS18B20 High-Temp Waterproof Probe,Stainless Casing Teflon Cable,3 per barrel,120.00,1-Wire Temp Sensing (Water/Substrate/Air)
+D-1,Display,TM1637 4-Digit 7-Segment Module,Red LED 2-Wire Serial,2 per barrel,80.00,Local Temp & Time Display (AP-06 Door)
+A-1,Thermal Mgmt,120x120mm Filtered Fan 220V,IP54 Intake Grill,1 per barrel,400.00,Cools SSRs (AP-06)
+A-2,Thermal Mgmt,120x120mm Filtered Exhaust Vent,IP54 Outlet Grill,1 per barrel,250.00,Passive exhaust (AP-06)
+A-3,Thermal Mgmt,KTS-011 Panel Thermostat,NO Contact Blue Dial (0-60C),1 per barrel,150.00,Triggers cooling fan (AP-06)
+M-1,Misc,Passive Components Pack,2.2kOhm/1kOhm pullups + 2N7000,1,150.00,Signal integrity and low-side SSR driving

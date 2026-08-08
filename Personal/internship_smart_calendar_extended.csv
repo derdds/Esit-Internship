@@ -1,0 +1,82 @@
+July / August 2026 Internship Calendar & SMART Goal Tracker,,,,,,
+Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday
+"Jul 20
+[Done] Workstation Setup & SKYMEMS Compass Test","Jul 21
+[Done] TarımSU App Shadowing & STM32 Doc Review","Jul 22
+[Done] Enclosure CAD 3D Modeling (IP65)","Jul 23
+[Done] Housing CAD Refinement & Tolerances","Jul 24
+[Done] Schematic Capture (5V Buck, BT, Darlington)","Jul 25
+[Done] PCB Component Placement & Power Routing","Jul 26
+[Off] Weekend Rest"
+"Jul 27
+[Done] PCB Revisions & Feature Integration","Jul 28
+[Done] 3D Clearance Check & CAD Verification","Jul 29
+[Done] IR Sensor DIY Feasibility & Trade-off Math","Jul 30
+[Done] Final PCB DRC & Gerber File Export","Jul 31
+[Done] Code Setup, PC Recovery & Bike Meter Spec","Aug 1
+[Done] Firmware Baseline & Strain Gauge Math","Aug 2
+[Off] Weekend Rest"
+"Aug 3
+[Done] Mid-Term Review & Journal Logging","Aug 4
+[Pending]","Aug 5
+[Pending]","Aug 6
+[Pending]","Aug 7
+[Pending]","Aug 8
+[Pending]","Aug 9
+[Off] Weekend Rest"
+"Aug 10
+[Pending]","Aug 11
+[Pending]","Aug 12
+[Pending]","Aug 13
+[Pending]","Aug 14
+[Pending]","Aug 15
+[Pending]","Aug 16
+[Off] Weekend Rest"
+"Aug 17
+[Pending]","Aug 18
+[Pending]","Aug 19
+[Pending]","Aug 20
+[Pending]","Aug 21
+[Pending] Final Internship Day","Aug 22
+[Off] Weekend Rest","Aug 23
+[Off] Weekend Rest"
+
+
+==================================================
+DETAILED DAILY S.M.A.R.T. LOGS AND TASK TRACKER
+==================================================
+
+Date,Day of Week,Category,SMART Goal,Specific Target / Metric,Completed Actionable To-Dos,Status
+2026-07-20,Monday,Onboarding,Workstation & Sensor Init,Configure ECP200 e-compass baud rate & stream test within 2 hrs,"Set up workstation, shadowed ESIT Weather dev, tested SKYMEMS ECP200 compass",Completed
+2026-07-21,Tuesday,System Research,STM32 Architecture Study,Map out 100% of required MCU peripherals & pin assignments,"Shadowed TarımSU web app dev, assisted intern workstation setup, reviewed STM32 datasheet, received primary project brief",Completed
+2026-07-22,Wednesday,3D CAD,Waterproof Enclosure Model,Design main housing with IP65 ingress protection & 1mm tolerances,"Drafted initial 3D chassis, designed watertight seals, positioned external I/O ports",Completed
+2026-07-23,Thursday,3D CAD,Enclosure Mechanics Polish,Ensure zero mechanical interference between internal components & walls,"Refined housing geometries, adjusted wall thickness, optimized mounting bosses",Completed
+2026-07-24,Friday,Hardware,Deterrent Box Schematic,Complete schematic capture with 0 ERC (Electrical Rule Check) errors,"Captured schematics for onboard charger, 5V buck converters, Darlington arrays for LEDs, and Bluetooth module",Completed
+2026-07-25,Saturday,PCB Design,Layout Topology & Traces,Route all high-current 5V power traces with >=20mil trace width,"Placed components for optimal thermal spread, routed power rails and signal lines",Completed
+2026-07-26,Sunday,Rest,N/A,N/A,Rest day,Completed
+2026-07-27,Monday,PCB Design,Feature Revision & Reroute,Incorporate new board feature requests without increasing layer count,"Rerouted PCB traces, adjusted footprint placement for additional requested controls",Completed
+2026-07-28,Tuesday,CAD / PCB,3D Fit Verification,Achieve 100% clearance match between PCB STEP export and enclosure,"Exported 3D PCB STEP file, verified physical fit inside enclosure model, adjusted connector cutouts",Completed
+2026-07-29,Wednesday,R&D / Math,IR Sensor Feasibility Study,Evaluate DIY 5V IR sensor to cut power by 80% & costs below target BOM,Performed power/cost trade-off calculations for 5V DIY IR sensor; determined component sourcing unviable and rejected redesign,Completed
+2026-07-30,Thursday,PCB Design,Gerber Production Export,Pass 100% manufacturing DRC checks & generate production files,"Ran final DRC checks, verified layer stackup, exported manufacturing Gerber and drill files",Completed
+2026-07-31,Friday,Firmware / R&D,Firmware Init & Bike Meter,"Set up IDE, resolve IT outage, draft architecture for secondary project",Initiated main project firmware; theorized low-power ADC/amp architecture for DIY bike power meter during PC outage; built test circuit & code,Completed
+2026-08-01,Saturday,Firmware,Sensor Signal Conditioning,Validate baseline ADC reading stability with continuous logging,"Configured ADC sampling rate, authored baseline calibration math, verified SPI communication",Completed
+2026-08-02,Sunday,Rest,N/A,N/A,Rest day,Completed
+2026-08-03,Monday,Documentation,Mid-Term Review & Logging,Finalize 100% of past daily logs and format SMART task matrices,"Updated internship journal entries, verified project milestones, compiled progress log",Completed
+2026-08-04,Tuesday,,,,,Pending
+2026-08-05,Wednesday,,,,,Pending
+2026-08-06,Thursday,,,,,Pending
+2026-08-07,Friday,,,,,Pending
+2026-08-08,Saturday,,,,,Pending
+2026-08-09,Sunday,Rest,N/A,N/A,Rest day,Completed
+2026-08-10,Monday,,,,,Pending
+2026-08-11,Tuesday,,,,,Pending
+2026-08-12,Wednesday,,,,,Pending
+2026-08-13,Thursday,,,,,Pending
+2026-08-14,Friday,,,,,Pending
+2026-08-15,Saturday,,,,,Pending
+2026-08-16,Sunday,Rest,N/A,N/A,Rest day,Completed
+2026-08-17,Monday,,,,,Pending
+2026-08-18,Tuesday,,,,,Pending
+2026-08-19,Wednesday,,,,,Pending
+2026-08-20,Thursday,,,,,Pending
+2026-08-21,Friday,,,,,Pending

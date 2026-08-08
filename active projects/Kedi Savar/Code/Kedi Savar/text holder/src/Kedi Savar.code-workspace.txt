@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "Kedi 2",
+			"path": "../../../../../Documents/PlatformIO/Projects/Kedi 2"
+		}
+	],
+	"settings": {}
+}
