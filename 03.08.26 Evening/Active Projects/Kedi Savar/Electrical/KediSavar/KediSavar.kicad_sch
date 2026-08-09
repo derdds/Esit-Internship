@@ -10551,7 +10551,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 57.15 140.208 90)
 			(hide yes)
 			(show_name no)
@@ -10632,7 +10632,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 80.518 184.15 90)
 			(hide yes)
 			(show_name no)
@@ -10905,7 +10905,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 29.718 175.26 90)
 			(hide yes)
 			(show_name no)
@@ -10939,10 +10939,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "14977619-4a69-4b60-99df-5fa34e1b1ef3")
+			(uuid "14977619-4a69-4b60-99df-5fa34e1b1ef4")
 		)
 		(pin "1"
-			(uuid "2b5b1949-bb50-47c2-b4df-81a23c075e5c")
+			(uuid "2b5b1949-bb50-47c2-b4df-81a23c075e5d")
 		)
 		(instances
 			(project "KediSavar"
@@ -10985,7 +10985,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:SOIC-16_3.9x9.9mm_P1.27mm"
 			(at 260.35 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -11107,7 +11107,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 39.6748 180.34 0)
 			(hide yes)
 			(show_name no)
@@ -11186,7 +11186,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 96.52 137.668 90)
 			(hide yes)
 			(show_name no)
@@ -11265,7 +11265,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 77.7748 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -11506,7 +11506,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 182.88 103.378 90)
 			(hide yes)
 			(show_name no)
@@ -11585,7 +11585,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 107.95 137.668 90)
 			(hide yes)
 			(show_name no)
@@ -11827,7 +11827,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:L_12x12mm_H8mm"
 			(at 40.64 144.78 0)
 			(hide yes)
 			(show_name no)
@@ -11987,7 +11987,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 85.3948 147.32 0)
 			(hide yes)
 			(show_name no)
@@ -12066,7 +12066,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 44.7548 180.34 0)
 			(hide yes)
 			(show_name no)
@@ -12100,10 +12100,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d90")
+			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d91")
 		)
 		(pin "2"
-			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb68")
+			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb69")
 		)
 		(instances
 			(project "KediSavar"
@@ -12145,7 +12145,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 50.8 187.452 90)
 			(hide yes)
 			(show_name no)
@@ -12179,10 +12179,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "14977619-4a69-4b60-99df-5fa34e1b1ef3")
+			(uuid "14977619-4a69-4b60-99df-5fa34e1b1ef5")
 		)
 		(pin "1"
-			(uuid "2b5b1949-bb50-47c2-b4df-81a23c075e5c")
+			(uuid "2b5b1949-bb50-47c2-b4df-81a23c075e5e")
 		)
 		(instances
 			(project "KediSavar"
@@ -12467,7 +12467,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 95.5548 177.8 0)
 			(hide yes)
 			(show_name no)
@@ -12630,7 +12630,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 97.79 125.4252 0)
 			(hide yes)
 			(show_name no)
@@ -13040,7 +13040,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 182.88 116.078 90)
 			(hide yes)
 			(show_name no)
@@ -13119,7 +13119,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 182.88 90.678 90)
 			(hide yes)
 			(show_name no)
@@ -13198,7 +13198,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 182.88 97.028 90)
 			(hide yes)
 			(show_name no)
@@ -13277,7 +13277,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 34.5948 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -13311,10 +13311,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d90")
+			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d92")
 		)
 		(pin "2"
-			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb68")
+			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb6a")
 		)
 		(instances
 			(project "KediSavar"
@@ -13542,7 +13542,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 46.99 127.9652 0)
 			(hide yes)
 			(show_name no)
@@ -13576,10 +13576,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d90")
+			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d93")
 		)
 		(pin "2"
-			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb68")
+			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb6b")
 		)
 		(instances
 			(project "KediSavar"
@@ -13621,7 +13621,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
 			(at 90.4748 177.8 0)
 			(hide yes)
 			(show_name no)
@@ -13700,7 +13700,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 26.9748 153.67 0)
 			(hide yes)
 			(show_name no)
@@ -13734,10 +13734,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d90")
+			(uuid "742ec79a-bdfb-4bfa-8f40-658345ba7d94")
 		)
 		(pin "2"
-			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb68")
+			(uuid "2f0118d4-8d07-4d47-a359-c1eaccc8fb6c")
 		)
 		(instances
 			(project "KediSavar"
@@ -13869,7 +13869,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:SOP-8_3.76x4.96mm_P1.27mm"
 			(at 93.98 165.1 0)
 			(hide yes)
 			(show_name no)
@@ -14314,7 +14314,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:SOIC-16_3.9x9.9mm_P1.27mm"
 			(at 204.47 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -14518,7 +14518,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:L_12x12mm_H8mm"
 			(at 91.44 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -14760,7 +14760,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:wago 256 410"
 			(at 35.56 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -14863,7 +14863,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 238.76 116.078 90)
 			(hide yes)
 			(show_name no)
@@ -14942,7 +14942,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 182.88 109.728 90)
 			(hide yes)
 			(show_name no)
@@ -15190,7 +15190,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Can foot:SOP-8_3.76x4.96mm_P1.27mm"
 			(at 43.18 167.64 0)
 			(hide yes)
 			(show_name no)
@@ -15287,7 +15287,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 238.76 97.028 90)
 			(hide yes)
 			(show_name no)
@@ -15366,7 +15366,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 101.6 184.912 90)
 			(hide yes)
 			(show_name no)
@@ -15526,7 +15526,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 238.76 103.378 90)
 			(hide yes)
 			(show_name no)
@@ -15605,7 +15605,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 45.72 140.208 90)
 			(hide yes)
 			(show_name no)
@@ -15639,10 +15639,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "14977619-4a69-4b60-99df-5fa34e1b1ef3")
+			(uuid "14977619-4a69-4b60-99df-5fa34e1b1ef6")
 		)
 		(pin "1"
-			(uuid "2b5b1949-bb50-47c2-b4df-81a23c075e5c")
+			(uuid "2b5b1949-bb50-47c2-b4df-81a23c075e5f")
 		)
 		(instances
 			(project "KediSavar"
@@ -15684,7 +15684,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 238.76 90.678 90)
 			(hide yes)
 			(show_name no)
@@ -15763,7 +15763,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 238.76 84.328 90)
 			(hide yes)
 			(show_name no)
@@ -15843,7 +15843,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Can foot:esp32 placeholder 25.7"
+		(property "Footprint" "Can foot:ESP32 25.4mm"
 			(at 255.27 17.78 0)
 			(hide yes)
 			(show_name no)
@@ -16048,7 +16048,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 238.76 109.728 90)
 			(hide yes)
 			(show_name no)
@@ -16312,7 +16312,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 182.88 84.328 90)
 			(hide yes)
 			(show_name no)
