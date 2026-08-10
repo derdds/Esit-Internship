@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Power Meter Hardware Mocker (24-bit Edition)</title>
+    <style>
+        body { background: #121212; color: #00ff00; font-family: monospace; padding: 20px; }
+        button { background: #004400; color: #00ff00; border: 1px solid #00ff00; padding: 10px 20px; cursor: pointer; }
+        button:hover { background: #00ff00; color: #000; }
+        .log { margin-top: 20px; white-space: pre-wrap; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h2>nRF52 / Zephyr Dummy Data Generator</h2>
+    <p>Simulates LSM6DSL (52Hz) and PS09 (60Hz, 3-byte output) with variable RPM and biomechanical force curves.</p>
+    <button onclick="generateData()">Generate & Download Firmware Headers</button>
+    <div id="console" class="log"></div>
+
+    <script>
+        function log(msg) {
+            document.getElementById('console').innerText += msg + '\n';
+        }
+
+        function generateData() {
+            log("Initializing physics engine...");
+            
+            // Constants
+            const T_TOTAL = 15.0; // seconds
+            const F_STRAIN = 60; // Hz
+            const F_IMU = 52; // Hz
+            const L_CRANK = (167 + Math.random() * 8) / 1000.0; // 167mm to 175mm
+            const G = 9.81;
+            
+            // Random RPM sweep
+            const RPM_START = 60 + Math.random() * 30;
+            const RPM_END = 90 + Math.random() * 30;
+            const W_START = RPM_START * (2 * Math.PI / 60);
+            const W_END = RPM_END * (2 * Math.PI / 60);
+            
+            // Kinematics (Constant Jerk)
+            const J = 2 * (W_END - W_START) / (T_TOTAL * T_TOTAL);
+            const THETA_0 = 0;
+            
+            // Biomechanics
+            const F_MAX = 700.0; // Peak Newton force
+            const MAX_ROLL_RAD = 10 * (Math.PI / 180); // 10 degree sway
+            
+            // Quantization Scalars
+            const GYRO_SENSITIVITY = 35.0 / 1000.0;
+            const ACCEL_SENSITIVITY = 0.244 / 1000.0;
+            const STRAIN_LSB_PER_N = 100.0; // Bumped scale for larger 24-bit range
+
+            let strainData = [];
+            let imuData = [];
+
+            function getPhysicsAtTime(t) {
+                let w = W_START + 0.5 * J * t * t;
+                let alpha = J * t;
+                let theta = THETA_0 + W_START * t + (1/6) * J * t * t * t;
+                
+                let theta_mod = theta % (2 * Math.PI);
+                let F_tangential = 0;
+                if (theta_mod < Math.PI) {
+                    F_tangential = F_MAX * Math.pow(Math.sin(theta_mod), 3);
+                }
+                
+                // Introduce negative noise to test C-code sign extension
+                F_tangential += (Math.random() * 20 - 10); 
+
+                let true_power = F_tangential * w * L_CRANK;
+                if (true_power < 0) true_power = 0;
+
+                let roll_angle = MAX_ROLL_RAD * Math.sin(theta);
+                let roll_rate = MAX_ROLL_RAD * Math.cos(theta) * w;
+
+                let a_c = w * w * L_CRANK; 
+                let a_t = alpha * L_CRANK; 
+
+                return {
+                    timestamp: Math.round(t * 1000),
+                    force: F_tangential,
+                    power: true_power,
+                    ax: (a_c - G * Math.cos(theta)) / G, 
+                    ay: (a_t - G * Math.sin(theta)) / G, 
+                    az: Math.sin(roll_angle),
+                    gx: roll_rate * (180 / Math.PI), 
+                    gy: (Math.random() * 4 - 2), 
+                    gz: w * (180 / Math.PI),
+                    theta_deg: (theta * 180 / Math.PI) % 360
+                };
+            }
+
+            // Generate Strain Data (60Hz, 3-byte output)
+            for(let t = 0; t <= T_TOTAL; t += (1.0/F_STRAIN)) {
+                let phys = getPhysicsAtTime(t);
+                let raw_strain = Math.round(phys.force * STRAIN_LSB_PER_N);
+                
+                // Clamp to 24-bit signed int bounds
+                if(raw_strain > 8388607) raw_strain = 8388607;
+                if(raw_strain < -8388608) raw_strain = -8388608;
+
+                // Force unsigned 32-bit, mask bottom 24 bits
+                let unsigned_24 = (raw_strain >>> 0) & 0xFFFFFF;
+
+                // Extract High, Mid, Low bytes
+                let b0 = (unsigned_24 >> 16) & 0xFF;
+                let b1 = (unsigned_24 >> 8) & 0xFF;
+                let b2 = unsigned_24 & 0xFF;
+
+                strainData.push({ ts: phys.timestamp, raw: raw_strain, b0: b0, b1: b1, b2: b2 });
+            }
+
+            // Generate IMU Data (52Hz)
+            for(let t = 0; t <= T_TOTAL; t += (1.0/F_IMU)) {
+                let phys = getPhysicsAtTime(t);
+                imuData.push({
+                    ts: phys.timestamp,
+                    ax: Math.round(phys.ax / ACCEL_SENSITIVITY), 
+                    ay: Math.round(phys.ay / ACCEL_SENSITIVITY), 
+                    az: Math.round(phys.az / ACCEL_SENSITIVITY),
+                    gx: Math.round(phys.gx / GYRO_SENSITIVITY), 
+                    gy: Math.round(phys.gy / GYRO_SENSITIVITY), 
+                    gz: Math.round(phys.gz / GYRO_SENSITIVITY),
+                    power: phys.power,
+                    theta: phys.theta_deg
+                });
+            }
+
+            log(`Generated ${strainData.length} strain samples (3-byte) and ${imuData.length} IMU samples.`);
+
+            // Build C Header
+            let hFile = `// Auto-generated Power Meter Dummy Data\n`;
+            hFile += `#ifndef DUMMY_DATA_H\n#define DUMMY_DATA_H\n\n#include <stdint.h>\n\n`;
+            hFile += `#define STRAIN_SAMPLE_COUNT ${strainData.length}\n`;
+            hFile += `#define IMU_SAMPLE_COUNT ${imuData.length}\n\n`;
+            
+            // Updated Struct for 3-byte array
+            hFile += `typedef struct { uint8_t raw_bytes[3]; uint32_t ts_ms; } dummy_strain_t;\n`;
+            hFile += `typedef struct { int16_t ax, ay, az, gx, gy, gz; uint32_t ts_ms; } dummy_imu_t;\n\n`;
+
+            hFile += `const dummy_strain_t test_strain_data[STRAIN_SAMPLE_COUNT] = {\n`;
+            strainData.forEach(d => {
+                let hex0 = "0x" + d.b0.toString(16).padStart(2, '0');
+                let hex1 = "0x" + d.b1.toString(16).padStart(2, '0');
+                let hex2 = "0x" + d.b2.toString(16).padStart(2, '0');
+                hFile += `    {{${hex0}, ${hex1}, ${hex2}}, ${d.ts}},\n`;
+            });
+            hFile += `};\n\n`;
+
+            hFile += `const dummy_imu_t test_imu_data[IMU_SAMPLE_COUNT] = {\n`;
+            imuData.forEach(d => hFile += `    {${d.ax}, ${d.ay}, ${d.az}, ${d.gx}, ${d.gy}, ${d.gz}, ${d.ts}},\n`);
+            hFile += `};\n\n`;
+
+            hFile += `const float ground_truth_power[IMU_SAMPLE_COUNT] = {\n`;
+            imuData.forEach(d => hFile += `    ${d.power.toFixed(2)}f,\n`);
+            hFile += `};\n\n#endif // DUMMY_DATA_H\n`;
+
+            // Build CSV
+            let csvFile = `timestamp_ms,type,ax_raw,ay_raw,az_raw,gx_raw,gy_raw,gz_raw,strain_b0,strain_b1,strain_b2,true_power_W,true_theta_deg\n`;
+            let merged = [];
+            strainData.forEach(d => merged.push({ts: d.ts, type: 'STRAIN', data: d}));
+            imuData.forEach(d => merged.push({ts: d.ts, type: 'IMU', data: d}));
+            merged.sort((a,b) => a.ts - b.ts);
+
+            merged.forEach(m => {
+                if(m.type === 'STRAIN') {
+                    // Output the three raw bytes
+                    csvFile += `${m.ts},STRAIN,,,,,,,${m.data.b0},${m.data.b1},${m.data.b2},,\n`;
+                } else {
+                    csvFile += `${m.ts},IMU,${m.data.ax},${m.data.ay},${m.data.az},${m.data.gx},${m.data.gy},${m.data.gz},,,,${m.data.power.toFixed(2)},${m.data.theta.toFixed(1)}\n`;
+                }
+            });
+
+            triggerDownload('dummy_data.h', hFile);
+            triggerDownload('dummy_data.csv', csvFile);
+            log("Download initiated.");
+        }
+
+        function triggerDownload(filename, text) {
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+</body>
+</html>

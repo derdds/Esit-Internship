@@ -1,47 +1,73 @@
 ﻿Intership Jorunal / Staj Defteri
 
 20.07.26
-First day of the intership, setup my workstation for further use, shadowed ESIT Weather devolopment and troubleshooting, setup SKYMEMS ecp200 e-compass for further use and testing in future projects.
+First day of the intership, setup my workstation for further use, shadowed ESIT Weather devolopment
+and troubleshooting, setup SKYMEMS ecp200 e-compass for further use and testing in future projects.
 
 21.07.26    
-Shadowed the development of TarımSU web app learned about its usage and workflow, helped setup a workstation for another intern, Read the documantatio for STM32 chips, Got assigned my project for the internship.
+Shadowed the development of TarımSU web app learned about its usage and workflow, helped setup a
+workstation for another intern, Read the documantatio for STM32 chips, Got assigned my project.
 
 22.07.26
-Started working on the specific project by designing the housing for the project making sure it's water resistant and has the I/O needed.
+Started working on the specific project by designing the housing for the project making sure it's
+water resistant and has the I/O needed.
 
 23.07.26
-Continued CAD development for the custom enclosure.
-Refined housing geometries, mechanical tolerances, and mounting points to ensure weather resistance and proper internal alignment for the electronic hardware.
+Continued CAD development for the custom enclosure. Refined housing geometries, mechanical tolerances,
+and mounting points to ensure weather resistance and proper internal alignment for the electronic hardware.
 
 24.07.26
-Initiated schematic capture for the primary deterrent system.
-Integrated core subsystems including an onboard charging circuit, step-down buck converters for 5V rails, Darlington transistor arrays for LED indicator driving, and a Bluetooth module for telemetry logging.
+Initiated schematic capture for the primary deterrent system. Integrated core subsystems including an
+onboard charging circuit, step-down buck converters for 5V rails, Darlington transistor arrays for LED
+indicator driving, and a Bluetooth module for telemetry logging.
 
 25.07.26
-Transitioned from schematic design to PCB layout.
-Placed components according to thermal and signal integrity constraints, established power routing for high-current paths, and laid down initial signal traces.
+Transitioned from schematic design to PCB layout. Placed components according to thermal and signal
+integrity constraints, established power routing for high-current paths, and laid down initial signal traces.
 
 27.07.26
-Revised PCB design following updated feature requirements.
-Rerouted several circuit blocks and adjusted layout topography to accommodate additional design changes requested by the team.
+Revised PCB design following updated feature requirements. Rerouted several circuit blocks and adjusted layout
+topography to accommodate additional design changes requested by the team.
 
 28.07.26
-Completed secondary revisions on the PCB layout.
-Re-exported updated board dimensions back into the 3D CAD workspace to verify mechanical clearances, connector alignments, and enclosure fit.
+Completed secondary revisions on the PCB layout. Re-exported updated board dimensions back into the 3D
+CAD workspace to verify mechanical clearances, connector alignments, and enclosure fit.
 
 29.07.26
-Evaluated a discrete IR Line-of-Sight (LoS) sensor to replace an overpriced commercial unit.
-Performed trade-off analysis for a custom 5V DIY implementation aimed at reducing power draw to 1/5th and improving battery life by nearly 4x.
-Calculated component sourcing costs, board space constraints, and procurement lead times; concluded the custom replacement was commercially unviable and abandoned the redesign.
+Evaluated a discrete IR Line-of-Sight (LoS) sensor to replace an overpriced commercial unit. Performed
+trade-off analysis for a custom 5V DIY implementation aimed at reducing power draw to 1/5th and improving
+battery life by nearly 4x. Calculated component sourcing costs, board space constraints, and procurement
+lead times; concluded the custom replacement was commercially unviable and abandoned the redesign.
 
 30.07.26
 Conducted Design Rule Checks (DRC) and layout integrity verification on the finalized PCB design.
 Generated, inspected, and exported final manufacturing Gerber files and drill charts.
 
 31.07.26
-Initiated embedded software development and environment setup for the primary project code.
-Experienced a 3-hour local workstation hardware outage; utilized downtime to onboard and conduct conceptual/architectural design for a secondary project (DIY Bicycle Power Meter).
-Researched power meter topologies, comparing strain gauge load cells vs. alternate sensor options, low-power high-resolution ADCs, instrumentation amplifiers, Bluetooth transceivers, and target mobile app feature sets.
-Built physical test circuits and authored baseline firmware to evaluate peripheral communication.
+Initiated embedded software development and environment setup for the primary project code. Experienced
+a 3-hour local workstation hardware outage; utilized downtime to onboard and conduct conceptual/architectural
+design for a secondary project (DIY Bicycle Power Meter). Researched power meter topologies, comparing strain
+gauge load cells vs. alternate sensor options, low-power high-resolution ADCs, instrumentation amplifiers,
+Bluetooth transceivers, and target mobile app feature sets. Built physical test circuits and authored baseline
+firmware to evaluate peripheral communication.
 
 03.08.26
+Completed embedded software development for the primary project and successfully validated execution on the
+test hardware. Refactored codebase into separate modular files to improve readability and added inline function
+documentation. Following an unrecoverable file error that corrupted the schematic and PCB files, restarted
+schematic capture from scratch and completed it within the day, incorporating circuit robustness enhancements
+and updated feature requirements.
+
+04.08.26
+Worked on the PCB layout redesign, ensuring strict adherence to mechanical tolerances and system specifications.
+Completed the primary layout pass by noon and spent the afternoon finalizing trace routing and thermal relief.
+Conducted a design review with a senior engineer, passed all Design Rule Checks (DRC) and manufacturing constraint
+checks, and exported/submitted Gerber files for board fabrication.
+
+05.08.26
+Absent on medical leave per physician recommendation for health recovery.
+
+06.08.26
+Initiated preliminary R&D for the secondary project (pedal-mounted bicycle power meter). Analyzed physical
+mounting constraints and structural stress zones. Evaluated candidate components including strain gauge
+configurations, instrumentation amplifiers, low-power ADCs, and wireless transceivers.s

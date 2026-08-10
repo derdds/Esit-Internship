@@ -1,0 +1,8 @@
+Designator,Quantity,Part Number,Description,Package,Supplier Link
+U1_RF,3,MDBT42Q-P512KV2,Raytac nRF52832 BLE Module (FPU),Castellated,https://www.direnc.net/nrf52832-bluetooth-modul-mdbt42q-p512kv2-en
+U2_ADC,2,PS09,ScioSense PicoStrain TDC,QFN-40,https://www.eastechic.tr/products/components/ps09fn-10920734
+U3_IMU,2,LSM6DSLTR,ST 6-Axis IMU (FIFO + Interrupts),LGA-14,https://www.ozdisan.com/p/ivmeolcerler-913/stm-lsm6dsltr-653130
+SW1_SPEED,1,Generic,Normally Open Mechanical Reed Switch,THT/SMD,TBD (Local Supplier)
+BAT1,3,Generic,CR2050 SMT Coin Cell Holder,SMD,TBD (Local Supplier)
+C_REF,2,TBD,C0G/NP0 Reference Cap (Required for PS09),0402,TBD (Local Supplier)
+C_DEC,X,100nF,Standard Decoupling Capacitors,0402,TBD (Local Supplier)

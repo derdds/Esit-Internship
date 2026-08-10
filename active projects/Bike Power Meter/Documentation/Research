@@ -1,0 +1,3 @@
+what should be the data structure between the sensors and the mcu for a crank
+sp09 can send raw data, new IMU can do 4kb packages, the 1s fifo with 6 axis information.
+they should be in SPI and a way that makes sense / easy to handle in the mcu and give the data sets the correct timestampsin the mcu

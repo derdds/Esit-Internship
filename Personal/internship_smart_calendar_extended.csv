@@ -1,51 +1,6 @@
-July / August 2026 Internship Calendar & SMART Goal Tracker,,,,,,
-Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday
-"Jul 20
-[Done] Workstation Setup & SKYMEMS Compass Test","Jul 21
-[Done] TarımSU App Shadowing & STM32 Doc Review","Jul 22
-[Done] Enclosure CAD 3D Modeling (IP65)","Jul 23
-[Done] Housing CAD Refinement & Tolerances","Jul 24
-[Done] Schematic Capture (5V Buck, BT, Darlington)","Jul 25
-[Done] PCB Component Placement & Power Routing","Jul 26
-[Off] Weekend Rest"
-"Jul 27
-[Done] PCB Revisions & Feature Integration","Jul 28
-[Done] 3D Clearance Check & CAD Verification","Jul 29
-[Done] IR Sensor DIY Feasibility & Trade-off Math","Jul 30
-[Done] Final PCB DRC & Gerber File Export","Jul 31
-[Done] Code Setup, PC Recovery & Bike Meter Spec","Aug 1
-[Done] Firmware Baseline & Strain Gauge Math","Aug 2
-[Off] Weekend Rest"
-"Aug 3
-[Done] Mid-Term Review & Journal Logging","Aug 4
-[Pending]","Aug 5
-[Pending]","Aug 6
-[Pending]","Aug 7
-[Pending]","Aug 8
-[Pending]","Aug 9
-[Off] Weekend Rest"
-"Aug 10
-[Pending]","Aug 11
-[Pending]","Aug 12
-[Pending]","Aug 13
-[Pending]","Aug 14
-[Pending]","Aug 15
-[Pending]","Aug 16
-[Off] Weekend Rest"
-"Aug 17
-[Pending]","Aug 18
-[Pending]","Aug 19
-[Pending]","Aug 20
-[Pending]","Aug 21
-[Pending] Final Internship Day","Aug 22
-[Off] Weekend Rest","Aug 23
-[Off] Weekend Rest"
-
-
-==================================================
+,,,,,,
 DETAILED DAILY S.M.A.R.T. LOGS AND TASK TRACKER
 ==================================================
-
 Date,Day of Week,Category,SMART Goal,Specific Target / Metric,Completed Actionable To-Dos,Status
 2026-07-20,Monday,Onboarding,Workstation & Sensor Init,Configure ECP200 e-compass baud rate & stream test within 2 hrs,"Set up workstation, shadowed ESIT Weather dev, tested SKYMEMS ECP200 compass",Completed
 2026-07-21,Tuesday,System Research,STM32 Architecture Study,Map out 100% of required MCU peripherals & pin assignments,"Shadowed TarımSU web app dev, assisted intern workstation setup, reviewed STM32 datasheet, received primary project brief",Completed
@@ -61,10 +16,10 @@ Date,Day of Week,Category,SMART Goal,Specific Target / Metric,Completed Actionab
 2026-07-31,Friday,Firmware / R&D,Firmware Init & Bike Meter,"Set up IDE, resolve IT outage, draft architecture for secondary project",Initiated main project firmware; theorized low-power ADC/amp architecture for DIY bike power meter during PC outage; built test circuit & code,Completed
 2026-08-01,Saturday,Firmware,Sensor Signal Conditioning,Validate baseline ADC reading stability with continuous logging,"Configured ADC sampling rate, authored baseline calibration math, verified SPI communication",Completed
 2026-08-02,Sunday,Rest,N/A,N/A,Rest day,Completed
-2026-08-03,Monday,Documentation,Mid-Term Review & Logging,Finalize 100% of past daily logs and format SMART task matrices,"Updated internship journal entries, verified project milestones, compiled progress log",Completed
-2026-08-04,Tuesday,,,,,Pending
-2026-08-05,Wednesday,,,,,Pending
-2026-08-06,Thursday,,,,,Pending
+2026-08-03,Monday,Firmware / Schematic,Firmware Finish & PCB Redesign,Refactor code for modularity & recreate PCB schematic with 0 ERC errors,"Completed deterrent box code on test board, refactored codebase into separate modules with documentation, recreated lost schematic from scratch with design robustness improvements",Completed
+2026-08-04,Tuesday,PCB Design,Layout & Production Release,Pass 100% manufacturing DRC & obtain senior engineer review approval,"Completed PCB layout draft, integrated design fixes, passed senior engineer review, ran DRC/manufacturing checks, uploaded Gerber files for fabrication order",Completed
+2026-08-05,Wednesday,Medical Leave,Rest & Recovery,N/A,Medical leave taken per doctor recommendation,Completed
+2026-08-06,Thursday,R&D / Mechanics,Bike Power Meter Feasibility,Define mechanical constraints & active component selection for pedal assembly,"Initiated preliminary research on pedal-mounted bicycle power meter, evaluated physical design constraints, researched component options (strain gauges, instrumentation amps, ADCs)",Completed
 2026-08-07,Friday,,,,,Pending
 2026-08-08,Saturday,,,,,Pending
 2026-08-09,Sunday,Rest,N/A,N/A,Rest day,Completed
