@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Power Meter Hardware Mocker (24-bit Edition)</title>
+    <style>
+        body { background: #121212; color: #00ff00; font-family: monospace; padding: 10px 20px; }
+        button { background: #004400; color: #00ff00; border: 1px solid #00ff00; padding: 10px 20px; cursor: pointer; margin-top: 10px; width: 100%; font-weight: bold;}
+        button:hover { background: #00ff00; color: #000; }
+        .log { margin-top: 20px; white-space: pre-wrap; font-size: 12px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .panel { background: #1a1a1a; padding: 10px; border: 1px solid #333; }
+        .panel h3 { margin-top: 0; font-size: 14px; color: #ffaa00; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        label { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 13px; align-items: center; }
+        input[type="number"], select { background: #000; color: #00ff00; border: 1px solid #00ff00; padding: 2px 4px; width: 80px; }
+        input[type="checkbox"] { transform: scale(1.2); }
+    </style>
+</head>
+<body>
+    <h2>nRF52 Dummy Data Gen: Environmental & Hardware Fault Injector</h2>
+    
+    <div class="grid">
+        <!-- Biomechanics -->
+        <div class="panel">
+            <h3>Biomechanics</h3>
+            <label><input type="checkbox" id="en_vectoring" checked> True Radial Vectoring</label>
+            <label><input type="checkbox" id="en_asym" checked> L/R Asymmetry</label>
+            <label>L/R Balance Ratio: <input type="number" id="lr_ratio" value="0.92" step="0.01"></label>
+            <label><input type="checkbox" id="en_backpedal" checked> Backpedal [t=5s to 8s]</label>
+        </div>
+
+        <!-- Hardware Faults -->
+        <div class="panel">
+            <h3>Hardware Faults</h3>
+            <label><input type="checkbox" id="en_clock_drift" checked> Asynchronous Clock Drift</label>
+            <label>Crystal Error (PPM): <input type="number" id="ppm_err" value="5000" step="100"></label>
+            <label><input type="checkbox" id="en_thermal" checked> Thermal Zero-Drift</label>
+            <label>Drift (LSB/s): <input type="number" id="thermal_rate" value="15" step="1"></label>
+            <label><input type="checkbox" id="en_gyro_walk" checked> Gyro Bias Random Walk</label>
+        </div>
+
+        <!-- Environment -->
+        <div class="panel">
+            <h3>Environment</h3>
+            <label>Road Incline (deg): <input type="number" id="incline_deg" value="5" step="0.5"></label>
+            <label>Road Surface Noise: 
+                <select id="road_surface">
+                    <option value="none">Glass (Ideal)</option>
+                    <option value="paved" selected>Paved (Hum)</option>
+                    <option value="gravel">Gravel (White Noise)</option>
+                    <option value="cobble">Cobble (Shocks)</option>
+                </select>
+            </label>
+        </div>
+
+        <!-- BLE / Pipeline -->
+        <div class="panel">
+            <h3>Pipeline / Transport</h3>
+            <label><input type="checkbox" id="en_drops" checked> Enable BLE Burst Drops</label>
+            <label>Base Drop (%): <input type="number" id="drop_base" value="2" step="0.1"></label>
+            <label>Burst Drop (%): <input type="number" id="drop_burst" value="25" step="1"></label>
+            <label>GATT FIFO Limit (samples): <input type="number" id="fifo_limit" value="20" step="1"></label>
+        </div>
+    </div>
+    
+    <button onclick="generateData()">GENERATE BARE-METAL BUFFERS</button>
+    <div id="console" class="log"></div>
+
+    <script>
+        function log(msg) { document.getElementById('console').innerText += msg + '\n'; }
+
+        function generateData() {
+            document.getElementById('console').innerText = '';
+            log("Initializing physics integration...");
+
+            // UI Parameters
+            const EN_VECTOR = document.getElementById('en_vectoring').checked;
+            const EN_ASYM = document.getElementById('en_asym').checked;
+            const LR_RATIO = parseFloat(document.getElementById('lr_ratio').value);
+            const EN_BP = document.getElementById('en_backpedal').checked;
+            
+            const EN_CLOCK = document.getElementById('en_clock_drift').checked;
+            const PPM_ERR = parseFloat(document.getElementById('ppm_err').value) / 1000000.0;
+            const EN_THERM = document.getElementById('en_thermal').checked;
+            const THERM_RATE = parseFloat(document.getElementById('thermal_rate').value);
+            const EN_GYRO = document.getElementById('en_gyro_walk').checked;
+
+            const INCLINE_RAD = parseFloat(document.getElementById('incline_deg').value) * (Math.PI / 180);
+            const BUMPINESS = document.getElementById('road_surface').value;
+
+            const EN_DROPS = document.getElementById('en_drops').checked;
+            const P_BASE = parseFloat(document.getElementById('drop_base').value) / 100.0;
+            const P_BURST = parseFloat(document.getElementById('drop_burst').value) / 100.0;
+            const FIFO_LIMIT = parseInt(document.getElementById('fifo_limit').value);
+
+            // Constants
+            const T_TOTAL = 15.0; 
+            const L_CRANK = 0.1725; 
+            const G = 9.81;
+            const DT = 0.001; 
+            
+            // Frequencies (incorporating drift)
+            const F_STRAIN = EN_CLOCK ? 60.0 * (1 + PPM_ERR) : 60.0;
+            const F_IMU = EN_CLOCK ? 52.0 * (1 - (PPM_ERR/2)) : 52.0;
+
+            // Dynamics
+            const W_START = 60 * (2 * Math.PI / 60);
+            const W_END = 110 * (2 * Math.PI / 60);
+            const J = 2 * (W_END - W_START) / (T_TOTAL * T_TOTAL);
+            const F_MAX = 700.0; 
+            const BASE_SWAY = 2 * (Math.PI / 180); 
+            const EFFORT_SWAY = 8 * (Math.PI / 180); 
+            const ENV_DECAY = Math.exp(-DT / 0.5);
+
+            // Quantization
+            const GYRO_S = 35.0 / 1000.0;
+            const ACCEL_S = 0.244 / 1000.0;
+            const STRAIN_LSB = 100.0; 
+
+            let strainData = [], imuData = [];
+            let strainBuffer = [], imuBuffer = [];
+
+            // State
+            let theta = 0;
+            let force_env = 0;
+            let next_strain_t = 0, next_imu_t = 0;
+            let drop_strain = false, drop_imu = false;
+            let therm_offset = 0;
+            let gx_bias = 0, gy_bias = 0, gz_bias = 0;
+
+            for(let t = 0; t <= T_TOTAL; t += DT) {
+                let w, alpha, F_tang, true_pwr;
+                let is_bp = EN_BP && (t >= 5.0 && t <= 8.0);
+
+                if (is_bp) {
+                    w = -20 * (2 * Math.PI / 60); 
+                    alpha = 0; 
+                    F_tang = -15.0; 
+                    true_pwr = 0;
+                } else {
+                    w = W_START + 0.5 * J * t * t;
+                    alpha = J * t;
+                    let theta_mod = Math.abs(theta % (2 * Math.PI));
+                    
+                    let phase_fmax = F_MAX;
+                    if (EN_ASYM && theta_mod >= Math.PI) phase_fmax *= LR_RATIO;
+
+                    let F_down = (theta_mod % Math.PI < Math.PI) ? phase_fmax * Math.pow(Math.sin(theta_mod), 3) : 0;
+                    
+                    if (EN_VECTOR) {
+                        F_tang = F_down * Math.abs(Math.sin(theta_mod)); 
+                    } else {
+                        F_tang = F_down;
+                    }
+                    F_tang += (Math.random() * 20 - 10); // Base noise
+                    
+                    true_pwr = F_tang * w * L_CRANK;
+                    if (true_pwr < 0) true_pwr = 0;
+                }
+                theta += w * DT;
+
+                let positive_force = (F_tang > 0) ? F_tang : 0;
+                force_env = Math.max(positive_force, force_env * ENV_DECAY);
+                let roll_amp = BASE_SWAY + (force_env / F_MAX) * EFFORT_SWAY;
+                let roll_angle = roll_amp * Math.sin(theta);
+                let roll_rate = roll_amp * Math.cos(theta) * w;
+
+                if (EN_THERM) therm_offset += THERM_RATE * DT;
+                if (EN_GYRO) {
+                    gx_bias += (Math.random() - 0.5) * 0.1;
+                    gy_bias += (Math.random() - 0.5) * 0.1;
+                    gz_bias += (Math.random() - 0.5) * 0.1;
+                }
+
+                // --- STRAIN SAMPLING ---
+                if (t >= next_strain_t) {
+                    let raw_strain = Math.round(F_tang * STRAIN_LSB) + therm_offset;
+                    if(raw_strain > 8388607) raw_strain = 8388607;
+                    if(raw_strain < -8388608) raw_strain = -8388608;
+                    let u24 = (raw_strain >>> 0) & 0xFFFFFF;
+                    let sample = { ts: Math.round(t * 1000), b0: (u24 >> 16) & 0xFF, b1: (u24 >> 8) & 0xFF, b2: u24 & 0xFF };
+
+                    if (EN_DROPS) {
+                        drop_strain = Math.random() < (drop_strain ? P_BURST : P_BASE);
+                        if (drop_strain) {
+                            strainBuffer.push(sample);
+                            if (strainBuffer.length > FIFO_LIMIT) strainBuffer.shift(); // FIFO Overrun
+                        } else {
+                            if (strainBuffer.length > 0) { strainData.push(...strainBuffer); strainBuffer = []; }
+                            strainData.push(sample);
+                        }
+                    } else { strainData.push(sample); }
+                    
+                    next_strain_t += (1.0 / F_STRAIN);
+                }
+
+                // --- IMU SAMPLING ---
+                if (t >= next_imu_t) {
+                    let n_ax = 0, n_ay = 0, n_az = 0;
+                    if (BUMPINESS === 'paved') { n_az = (Math.random()-0.5)*0.05; n_ax = (Math.random()-0.5)*0.02; }
+                    else if (BUMPINESS === 'gravel') { n_az = (Math.random()-0.5)*0.4; n_ax = (Math.random()-0.5)*0.2; n_ay = (Math.random()-0.5)*0.2; }
+                    else if (BUMPINESS === 'cobble') { 
+                        let shock = (Math.random() < 0.1); 
+                        n_az = shock ? (Math.random()*2.5-1.0) : (Math.random()-0.5)*0.2; 
+                        n_ax = shock ? (Math.random()*1.0-0.5) : (Math.random()-0.5)*0.1; 
+                    }
+
+                    let ax_g = (w * w * L_CRANK - G * Math.cos(theta + INCLINE_RAD)) / G + n_ax;
+                    let ay_g = (alpha * L_CRANK - G * Math.sin(theta + INCLINE_RAD)) / G + n_ay;
+                    let az_g = Math.sin(roll_angle) + n_az;
+
+                    let sample = {
+                        ts: Math.round(t * 1000),
+                        ax: Math.round(ax_g / ACCEL_S), ay: Math.round(ay_g / ACCEL_S), az: Math.round(az_g / ACCEL_S),
+                        gx: Math.round(((roll_rate * 180 / Math.PI) + gx_bias) / GYRO_S), 
+                        gy: Math.round(((Math.random() * 4 - 2) + gy_bias) / GYRO_S), 
+                        gz: Math.round(((w * 180 / Math.PI) + gz_bias) / GYRO_S),
+                        power: true_pwr, theta: (theta * 180 / Math.PI) % 360
+                    };
+
+                    if (EN_DROPS) {
+                        drop_imu = Math.random() < (drop_imu ? P_BURST : P_BASE);
+                        if (drop_imu) {
+                            imuBuffer.push(sample);
+                            if (imuBuffer.length > FIFO_LIMIT) imuBuffer.shift(); // FIFO Overrun
+                        } else {
+                            if (imuBuffer.length > 0) { imuData.push(...imuBuffer); imuBuffer = []; }
+                            imuData.push(sample);
+                        }
+                    } else { imuData.push(sample); }
+
+                    next_imu_t += (1.0 / F_IMU);
+                }
+            }
+
+            log(`Processed ${strainData.length} Strain / ${imuData.length} IMU frames.`);
+            
+            // Build Headers
+            let hFile = `// Weaponized Test-Bench Matrix\n#ifndef DUMMY_DATA_H\n#define DUMMY_DATA_H\n#include <stdint.h>\n\n`;
+            hFile += `#define STRAIN_SAMPLE_COUNT ${strainData.length}\n#define IMU_SAMPLE_COUNT ${imuData.length}\n\n`;
+            hFile += `typedef struct { uint8_t raw_bytes[3]; uint32_t ts_ms; } dummy_strain_t;\ntypedef struct { int16_t ax, ay, az, gx, gy, gz; uint32_t ts_ms; } dummy_imu_t;\n\n`;
+            
+            hFile += `const dummy_strain_t test_strain_data[STRAIN_SAMPLE_COUNT] = {\n`;
+            strainData.forEach(d => hFile += `    {{0x${d.b0.toString(16).padStart(2,'0')}, 0x${d.b1.toString(16).padStart(2,'0')}, 0x${d.b2.toString(16).padStart(2,'0')}}, ${d.ts}},\n`);
+            hFile += `};\n\nconst dummy_imu_t test_imu_data[IMU_SAMPLE_COUNT] = {\n`;
+            imuData.forEach(d => hFile += `    {${d.ax}, ${d.ay}, ${d.az}, ${d.gx}, ${d.gy}, ${d.gz}, ${d.ts}},\n`);
+            hFile += `};\n\nconst float ground_truth_power[IMU_SAMPLE_COUNT] = {\n`;
+            imuData.forEach(d => hFile += `    ${d.power.toFixed(2)}f,\n`);
+            hFile += `};\n#endif // DUMMY_DATA_H\n`;
+
+            // Build CSV
+            let csvFile = `timestamp_ms,type,ax_raw,ay_raw,az_raw,gx_raw,gy_raw,gz_raw,strain_b0,strain_b1,strain_b2,true_power_W,true_theta_deg\n`;
+            let merged = [];
+            strainData.forEach(d => merged.push({ts: d.ts, type: 'STRAIN', data: d}));
+            imuData.forEach(d => merged.push({ts: d.ts, type: 'IMU', data: d}));
+            merged.sort((a,b) => a.ts - b.ts);
+
+            merged.forEach(m => {
+                if(m.type === 'STRAIN') csvFile += `${m.ts},STRAIN,,,,,,,${m.data.b0},${m.data.b1},${m.data.b2},,\n`;
+                else csvFile += `${m.ts},IMU,${m.data.ax},${m.data.ay},${m.data.az},${m.data.gx},${m.data.gy},${m.data.gz},,,,${m.data.power.toFixed(2)},${m.data.theta.toFixed(1)}\n`;
+            });
+
+            triggerDownload('dummy_data.h', hFile);
+            triggerDownload('dummy_data.csv', csvFile);
+            log("Firmware assault vectors generated.");
+        }
+
+        function triggerDownload(filename, text) {
+            let el = document.createElement('a');
+            el.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            el.setAttribute('download', filename);
+            el.style.display = 'none';
+            document.body.appendChild(el);
+            el.click();
+            document.body.removeChild(el);
+        }
+    </script>
+</body>
+</html>

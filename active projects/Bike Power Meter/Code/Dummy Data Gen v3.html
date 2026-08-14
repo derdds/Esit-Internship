@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Power Meter Hardware Mocker (24-bit Edition)</title>
+    <style>
+        body { background: #121212; color: #00ff00; font-family: monospace; padding: 20px; }
+        button { background: #004400; color: #00ff00; border: 1px solid #00ff00; padding: 10px 20px; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #00ff00; color: #000; }
+        .log { margin-top: 20px; white-space: pre-wrap; font-size: 14px; }
+        .controls { background: #1a1a1a; padding: 15px; border: 1px solid #333; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { background: #000; color: #00ff00; border: 1px solid #00ff00; padding: 2px 5px; }
+    </style>
+</head>
+<body>
+    <h2>nRF52 / Zephyr Dummy Data Generator</h2>
+    <div class="controls">
+        <label>Road Incline (deg): <input type="number" id="incline_deg" value="5" step="0.5"></label>
+        <label>Base Packet Drop (%): <input type="number" id="drop_base" value="2" step="0.1"></label>
+        <label>Burst Packet Drop (%): <input type="number" id="drop_burst" value="25" step="1"></label>
+        <label>Road Surface: 
+            <select id="road_surface">
+                <option value="paved">Paved (Smooth Asphalt)</option>
+                <option value="gravel">Gravel (High Frequency)</option>
+                <option value="cobble">Cobblestone (Impulsive Shocks)</option>
+            </select>
+        </label>
+        <label><input type="checkbox" id="en_backpedal" checked> Insert Backpedal Segment [t=5s to t=8s]</label>
+    </div>
+    
+    <button onclick="generateData()">Generate & Download Firmware Headers</button>
+    <div id="console" class="log"></div>
+
+    <script>
+        function log(msg) {
+            document.getElementById('console').innerText += msg + '\n';
+        }
+
+        function generateData() {
+            log("Initializing stateful physics engine...");
+            
+            // User Settings
+            const INCLINE_RAD = parseFloat(document.getElementById('incline_deg').value) * (Math.PI / 180);
+            const P_DROP_BASE = parseFloat(document.getElementById('drop_base').value) / 100.0;
+            const P_DROP_BURST = parseFloat(document.getElementById('drop_burst').value) / 100.0;
+            const EN_BACKPEDAL = document.getElementById('en_backpedal').checked;
+            const BUMPINESS = document.getElementById('road_surface').value;
+
+            // Constants
+            const T_TOTAL = 15.0; 
+            const F_STRAIN = 60; 
+            const F_IMU = 52; 
+            const L_CRANK = 0.1725; 
+            const G = 9.81;
+            const DT = 0.001; 
+            
+            // Dynamics
+            const RPM_START = 60, RPM_END = 110;
+            const W_START = RPM_START * (2 * Math.PI / 60);
+            const W_END = RPM_END * (2 * Math.PI / 60);
+            const J = 2 * (W_END - W_START) / (T_TOTAL * T_TOTAL);
+            
+            // Biomechanics & Sway Filters
+            const F_MAX = 700.0; 
+            const BASE_SWAY = 2 * (Math.PI / 180); 
+            const EFFORT_SWAY = 8 * (Math.PI / 180); 
+            const ENV_TAU = 0.5; 
+            const ENV_DECAY = Math.exp(-DT / ENV_TAU);
+
+            // Quantization Scalars
+            const GYRO_SENSITIVITY = 35.0 / 1000.0;
+            const ACCEL_SENSITIVITY = 0.244 / 1000.0;
+            const STRAIN_LSB_PER_N = 100.0; 
+
+            let strainData = [];
+            let imuData = [];
+
+            // State Variables
+            let theta = 0;
+            let force_envelope = 0;
+            let next_strain_t = 0;
+            let next_imu_t = 0;
+            let drop_state_strain = false;
+            let drop_state_imu = false;
+
+            // Master Integration Loop
+            for(let t = 0; t <= T_TOTAL; t += DT) {
+                let w, alpha, F_tangential, true_power;
+                let is_backpedaling = EN_BACKPEDAL && (t >= 5.0 && t <= 8.0);
+
+                // 1. Kinematics & Applied Force
+                if (is_backpedaling) {
+                    w = -20 * (2 * Math.PI / 60); 
+                    alpha = 0; 
+                    F_tangential = -15.0; 
+                    true_power = 0;
+                } else {
+                    w = W_START + 0.5 * J * t * t;
+                    alpha = J * t;
+                    
+                    let theta_mod = Math.abs(theta % (2 * Math.PI));
+                    F_tangential = (theta_mod < Math.PI) ? F_MAX * Math.pow(Math.sin(theta_mod), 3) : 0;
+                    F_tangential += (Math.random() * 20 - 10); 
+                    
+                    true_power = F_tangential * w * L_CRANK;
+                    if (true_power < 0) true_power = 0;
+                }
+
+                theta += w * DT;
+
+                // 2. Biomechanical Envelope & Sway
+                let positive_force = (F_tangential > 0) ? F_tangential : 0;
+                force_envelope = Math.max(positive_force, force_envelope * ENV_DECAY);
+                
+                let roll_amp = BASE_SWAY + (force_envelope / F_MAX) * EFFORT_SWAY;
+                let roll_angle = roll_amp * Math.sin(theta);
+                let roll_rate = roll_amp * Math.cos(theta) * w;
+
+                // 3. Sensor Sampling (Strain @ 60Hz)
+                if (t >= next_strain_t) {
+                    let p_drop = drop_state_strain ? P_DROP_BURST : P_DROP_BASE;
+                    if (Math.random() < p_drop) {
+                        drop_state_strain = true; 
+                    } else {
+                        drop_state_strain = false;
+                        let raw_strain = Math.round(F_tangential * STRAIN_LSB_PER_N);
+                        
+                        if(raw_strain > 8388607) raw_strain = 8388607;
+                        if(raw_strain < -8388608) raw_strain = -8388608;
+
+                        let u24 = (raw_strain >>> 0) & 0xFFFFFF;
+                        strainData.push({ 
+                            ts: Math.round(t * 1000), 
+                            raw: raw_strain, 
+                            b0: (u24 >> 16) & 0xFF, 
+                            b1: (u24 >> 8) & 0xFF, 
+                            b2: u24 & 0xFF 
+                        });
+                    }
+                    next_strain_t += (1.0 / F_STRAIN);
+                }
+
+                // 4. Sensor Sampling (IMU @ 52Hz)
+                if (t >= next_imu_t) {
+                    let p_drop = drop_state_imu ? P_DROP_BURST : P_DROP_BASE;
+                    if (Math.random() < p_drop) {
+                        drop_state_imu = true;
+                    } else {
+                        drop_state_imu = false;
+
+                        // Noise Profile Injection
+                        let noise_ax = 0, noise_ay = 0, noise_az = 0;
+                        if (BUMPINESS === 'paved') {
+                            noise_az = (Math.random() - 0.5) * 0.05; 
+                            noise_ax = (Math.random() - 0.5) * 0.02;
+                        } else if (BUMPINESS === 'gravel') {
+                            noise_az = (Math.random() - 0.5) * 0.4;
+                            noise_ax = (Math.random() - 0.5) * 0.2;
+                            noise_ay = (Math.random() - 0.5) * 0.2;
+                        } else if (BUMPINESS === 'cobble') {
+                            let is_shock = (Math.random() < 0.1); 
+                            noise_az = is_shock ? (Math.random() * 2.5 - 1.0) : (Math.random() - 0.5) * 0.2;
+                            noise_ax = is_shock ? (Math.random() * 1.0 - 0.5) : (Math.random() - 0.5) * 0.1;
+                        }
+                        
+                        let ax_g = (w * w * L_CRANK - G * Math.cos(theta + INCLINE_RAD)) / G + noise_ax;
+                        let ay_g = (alpha * L_CRANK - G * Math.sin(theta + INCLINE_RAD)) / G + noise_ay;
+                        let az_g = Math.sin(roll_angle) + noise_az;
+                        
+                        let gx_dps = roll_rate * (180 / Math.PI);
+                        let gy_dps = (Math.random() * 4 - 2);
+                        let gz_dps = w * (180 / Math.PI);
+
+                        imuData.push({
+                            ts: Math.round(t * 1000),
+                            ax: Math.round(ax_g / ACCEL_SENSITIVITY), 
+                            ay: Math.round(ay_g / ACCEL_SENSITIVITY), 
+                            az: Math.round(az_g / ACCEL_SENSITIVITY),
+                            gx: Math.round(gx_dps / GYRO_SENSITIVITY), 
+                            gy: Math.round(gy_dps / GYRO_SENSITIVITY), 
+                            gz: Math.round(gz_dps / GYRO_SENSITIVITY),
+                            power: true_power,
+                            theta: (theta * 180 / Math.PI) % 360
+                        });
+                    }
+                    next_imu_t += (1.0 / F_IMU);
+                }
+            }
+
+            log(`Generated ${strainData.length} strain samples and ${imuData.length} IMU samples.`);
+
+            // Build C Header
+            let hFile = `// Auto-generated Power Meter Dummy Data (Stateful Engine)\n`;
+            hFile += `#ifndef DUMMY_DATA_H\n#define DUMMY_DATA_H\n\n#include <stdint.h>\n\n`;
+            hFile += `#define STRAIN_SAMPLE_COUNT ${strainData.length}\n`;
+            hFile += `#define IMU_SAMPLE_COUNT ${imuData.length}\n\n`;
+            
+            hFile += `typedef struct { uint8_t raw_bytes[3]; uint32_t ts_ms; } dummy_strain_t;\n`;
+            hFile += `typedef struct { int16_t ax, ay, az, gx, gy, gz; uint32_t ts_ms; } dummy_imu_t;\n\n`;
+
+            hFile += `const dummy_strain_t test_strain_data[STRAIN_SAMPLE_COUNT] = {\n`;
+            strainData.forEach(d => {
+                let hex0 = "0x" + d.b0.toString(16).padStart(2, '0');
+                let hex1 = "0x" + d.b1.toString(16).padStart(2, '0');
+                let hex2 = "0x" + d.b2.toString(16).padStart(2, '0');
+                hFile += `    {{${hex0}, ${hex1}, ${hex2}}, ${d.ts}},\n`;
+            });
+            hFile += `};\n\n`;
+
+            hFile += `const dummy_imu_t test_imu_data[IMU_SAMPLE_COUNT] = {\n`;
+            imuData.forEach(d => hFile += `    {${d.ax}, ${d.ay}, ${d.az}, ${d.gx}, ${d.gy}, ${d.gz}, ${d.ts}},\n`);
+            hFile += `};\n\n`;
+
+            hFile += `const float ground_truth_power[IMU_SAMPLE_COUNT] = {\n`;
+            imuData.forEach(d => hFile += `    ${d.power.toFixed(2)}f,\n`);
+            hFile += `};\n\n#endif // DUMMY_DATA_H\n`;
+
+            // Build CSV
+            let csvFile = `timestamp_ms,type,ax_raw,ay_raw,az_raw,gx_raw,gy_raw,gz_raw,strain_b0,strain_b1,strain_b2,true_power_W,true_theta_deg\n`;
+            let merged = [];
+            strainData.forEach(d => merged.push({ts: d.ts, type: 'STRAIN', data: d}));
+            imuData.forEach(d => merged.push({ts: d.ts, type: 'IMU', data: d}));
+            merged.sort((a,b) => a.ts - b.ts);
+
+            merged.forEach(m => {
+                if(m.type === 'STRAIN') {
+                    csvFile += `${m.ts},STRAIN,,,,,,,${m.data.b0},${m.data.b1},${m.data.b2},,\n`;
+                } else {
+                    csvFile += `${m.ts},IMU,${m.data.ax},${m.data.ay},${m.data.az},${m.data.gx},${m.data.gy},${m.data.gz},,,,${m.data.power.toFixed(2)},${m.data.theta.toFixed(1)}\n`;
+                }
+            });
+
+            triggerDownload('dummy_data.h', hFile);
+            triggerDownload('dummy_data.csv', csvFile);
+            log("Download initiated.");
+        }
+
+        function triggerDownload(filename, text) {
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+</body>
+</html>
