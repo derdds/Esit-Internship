@@ -1,0 +1,26 @@
+Quantity,Target Part,Original Value,References,Summary,Link
+1,2x 1x22 Female Pin Header,,A1,2 pieces of 1x22 female 2.54mm pitch connectors,https://www.we-online.com/en/components/products/PHD_2_54_THT_SOCKET_HEADER_6130XX11821
+2,CORE MASTER SRI1004-220M,22uH,"L1, L2",INDUCTOR POWER 22UH 10X10MM SMD 3A,https://www.ozdisan.com/en/p/fixed-inductors-468/core-master-sri1004-220m-527910
+4,Generic SMD Test Point,TestPoint,"TP1, TP2, TP3, TP4",Test Point Pad 1.5x1.5mm,
+3,HOTTECH AO3406-HT,AO3400A,"Q1, Q2, Q3",MOSFET 3.6A 30V N-CH SOT23 TRENCH SMT,https://electroist.com/tr-tr/product/12971/ao3406-ht
+3,INFOREC LED XC-0805YVC,LED,"D5, D6, D7",LED SMD 0805 YELLOW 100mcd 120° WATER CLEAR,https://www.ozdisan.com/en/p/led-signal-color-361/inforec-led-xc-0805yvc-349097
+1,Panasonic AQY212GSZ,AQY212GZS,U3,PhotoMOS Relay SOP-4,https://industry.panasonic.eu/components/relays/photomos-relays/aqy212gsz
+2,SAMSUNG CL21B103KBANNNC,10nF,"C17, C19",MLCC 0805 10nF 50V 10% X7R,https://product.samsungsemiconductors.com/mlcc/CL21B103KBANNNC.do
+2,SAMSUNG CL21B104KBCNNNC,0.1uF,"C10, C12",MLCC 0805 100nF (0.1uF) 50V 10% X7R,https://product.samsungsemiconductors.com/mlcc/CL21B104KBCNNNC.do
+7,SAMSUNG CL21B104KBCNNNC,100nF,"C1, C2, C3, C4, C5, C6, C7",MLCC 0805 100nF 50V 10% X7R,https://product.samsungsemiconductors.com/mlcc/CL21B104KBCNNNC.do
+2,SAMSUNG CL21B332KBANNNC,3.3nF,"C11, C13",MLCC 0805 3.3nF 50V 10% X7R,https://product.samsungsemiconductors.com/mlcc/CL21B332KBANNNC.do
+4,SAMSUNG CL31B106KBHNNNE,10uF / 35-50v,"C14, C15, C16, C18",MLCC 1206 10uF 50V 10% X7R,https://product.samsungsemiconductors.com/mlcc/CL31B106KBHNNNE.do
+2,SAMSUNG CL32B226KAJNNNE,22uF / 25v,"C8, C9",MLCC 1210 22uF 25V 10% X7R,https://product.samsungsemiconductors.com/mlcc/CL32B226KAJNNNE.do
+2,STMicroelectronics ULN2003A,ULN2003A,"U1, U2",IC-2003 PWR RELAY 7NPN 1:1 16DIP/SOIC,https://www.st.com/en/interfaces-and-transceivers/uln2003a.html
+4,TAIWAN SEMICONDUCTOR SS14,SS14,"D1, D2, D3, D4",DIODE SCHOTTKY 40V 1A DO214AC (SMA),https://www.taiwansemi.com/en/products/details/SS14
+2,TAIWAN SEMICONDUCTOR TS3552CS RLG,TS3552CS,"U4, U5",IC DC-DC CONVERTER SMD 2A/350kHz TS3552 SOP8,https://www.taiwansemi.com/en/products/details/TS3552CS
+1,WAGO 256-410,Screw_Terminal_01x10,J2,PCB Terminal Block 10-Pole 2.5mm2 256 Series,https://www.wago.com/global/pcb-terminal-blocks-and-connectors/pcb-terminal-block/p/256-410
+1,WURTH ELEKTRONIK 61304021121,Conn_02x20_Odd_Even,J1,PIN HEADER 40PIN (2x20) 2.54mm,https://www.we-online.com/en/components/products/PHD_2_54_SMT_DUAL_SOCKET_HEADER_BOTTOM_ENTRY_6130XX243121
+1,YAGEO RC0805FR-07100KL,100k,R41,RES 0805 100K Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+13,YAGEO RC0805FR-0710KL,10k,"R1, R11, R13, R29, R3, R30, R31, R32, R33, R35, R5, R7, R9",RES 0805 10K Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+8,YAGEO RC0805FR-071KL,1k,"R10, R12, R14, R2, R4, R42, R6, R8",RES 0805 1K Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+3,YAGEO RC0805FR-07220RL,220,"R36, R37, R38",RES 0805 220 Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+2,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-07220rl-618126?s=YAGEO+RC0805FR-07220RL,2.2k,"R39, R40",RES 0805 2.2K Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+14,YAGEO RC0805FR-07330RL,330,"R15, R16, R17, R18, R19, R20, R21, R22, R23, R24, R25, R26, R43, R44",RES 0805 330 Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+2,YAGEO RC0805FR-0744K2L,44.2k,"R28, R34",RES 0805 44.2K Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series
+1,YAGEO RC0805FR-07470RL,470,R27,RES 0805 470 Ohms 1% 1/8W,https://www.yageo.com/en/Product/Index/Resistors/rc_series

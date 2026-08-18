@@ -146,7 +146,7 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.15,
+        "min_clearance": 0.1,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
@@ -519,7 +519,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.1,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -672,7 +672,7 @@
         "uuid": "31976edc-1617-4860-8247-b4693faa8d98"
       }
     ],
-    "used_designators": "U1-4,C1-12,R1-5,J1-5,NT1-2,JP1-3,TP1-3",
+    "used_designators": "U1-4,C1-25,R1-5,J1-5,NT1-2,JP1-3,FB1-8,TP1-3,Y1-2,Q1-6",
     "variants": []
   },
   "sheets": [

@@ -1,0 +1,26 @@
+Reference ID,Count,Generic (?),Value,Part ID,Summary,ESIT IFS (REPO),Link
+"L1, L2",2,Yes,22uH,CORE MASTER SRI1004-220M,INDUCTOR POWER 22UH 10X10MM SMD 3A,-,https://www.ozdisan.com/p/sabit-induktorler-468/core-master-nr4018-220m-508903
+"TP1, TP2, TP3, TP4",4,Yes,TestPoint,Generic SMD Test Point,Test Point Pad 1.5x1.5mm,N/A,
+"Q1, Q2, Q3",3,No,AO3400A,HOTTECH AO3406-HT,MOSFET 3.6A 30V N-CH SOT23 TRENCH SMT,-,https://www.ozdisan.com/p/discrete-mosfetler-435/hottech-ao3406-ht-487239?s=HOTTECH+AO3406-HT
+"D5, D6, D7",3,No,LED,INFOREC LED XC-0805YVC,LED SMD 0805 YELLOW 100mcd 120° WATER CLEAR,150-010500100-0010,https://www.ozdisan.com/p/sinyal-ledler-tek-renkli-361/inforec-led-xc-0805yvc-349097?s=INFOREC+LED+XC-0805YVC
+U3,1,No,AQY212GZS,Panasonic AQY212GSZ,PhotoMOS Relay SOP-4,-,https://www.ozdisan.com/p/solid-state-roleler-405/panasonic-comp-aqy212gsz-596939
+"C17, C19",2,Yes,10nF,SAMSUNG CL21B103KBANNNC,MLCC 0805 10nF 50V 10% X7R,150-010300100-0072,https://www.ozdisan.com/p/smt-smd-ve-mlcc-kapasitorler-184/samsung-cl21b103kbannnc-5607?s=SAMSUNG+CL21B103KBANNNC
+"C1, C2, C3, C4, C5, C6, C7, C10, C12",9,Yes,100nF,SAMSUNG CL21B104KBCNNNC,MLCC 0805 100nF 50V 10% X7R,150-010300100-0145,https://www.ozdisan.com/p/smt-smd-ve-mlcc-kapasitorler-184/samsung-cl21b104kbcnnnc-14777?s=SAMSUNG+CL21B104KBCNNNC
+"C11, C13",2,Yes,3.3nF,SAMSUNG CL21B332KBANNNC,MLCC 0805 3.3nF 50V 10% X7R,150-010300100-0005,https://www.ozdisan.com/p/smt-smd-ve-mlcc-kapasitorler-184/yageo-cc0805krx7r9bb332-587305
+"C14, C15, C16, C18",4,Yes,10uF,SAMSUNG CL31B106KBHNNNE,MLCC 1206 10uF 50V 10% X7R,150-010300100-0153,https://www.ozdisan.com/p/smt-smd-ve-mlcc-kapasitorler-184/samsung-cl31a106kbhnnnf-983193?catSequenceId=184
+"C8, C9",2,Yes,22uF,SAMSUNG CL31B226KPHNNNE,MLCC 1206 22uF 25V 10% X7R,150-010300100-0151,https://www.ozdisan.com/p/smt-smd-ve-mlcc-kapasitorler-184/samsung-cl31b226kphnnne-523424?catSequenceId=184
+"U1, U2",2,No,ULN2003ADR ,STMicroelectronics ULN2003A,IC-2003 PWR RELAY 7NPN 1:1 16DIP/SOIC,-,https://www.ozdisan.com/p/sira-transistor-entegreler-240/texas-uln2003adr-8671?catSequenceId=240
+"D1, D2, D3, D4",4,No,SS14,TAIWAN SEMICONDUCTOR SS14,DIODE SCHOTTKY 40V 1A DO214AC (SMA),150-010500000-0107,https://www.ozdisan.com/p/schottky-diyotlar-385/panjit-ss14-r1-00001-34293?catSequenceId=385
+"U4, U5",2,No,TS3552CS,TAIWAN SEMICONDUCTOR TS3552CS RLG,IC DC-DC CONVERTER SMD 2A/350kHz TS3552 SOP8,-,https://www.ozdisan.com/p/dc-dc-voltaj-kontrolorleri-274/tsc-ts3552cs-rlg-1211031?s=TS3552CS+RLG
+R41,1,Yes,100k,YAGEO RC0805FR-07100KL,RES 0805 100K Ohms 1% 1/8W,150-010400100-0041,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-07100kl-460162?s=YAGEO+RC0805FR-07100KL
+"R1, R11, R13, R29, R3, R30, R31, R32, R33, R35, R5, R7, R9",13,Yes,10k,YAGEO RC0805FR-0710KL,RES 0805 10K Ohms 1% 1/8W,150-010400100-0033,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-0710kl-26544?s=YAGEO+RC0805FR-0710KL
+"R10, R12, R14, R2, R4, R42, R6, R8",8,Yes,1k,YAGEO RC0805FR-071KL,RES 0805 1K Ohms 1% 1/8W,150-010400100-0031,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-071kl-460155?s=YAGEO+RC0805FR-071KL
+"R36, R37, R38",3,Yes,220,YAGEO RC0805FR-07220RL,RES 0805 220 Ohms 1% 1/8W,150-010400100-0030,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-07220rl-618126?s=YAGEO+RC0805FR-07220RL
+"R39, R40",2,Yes,2.2k,YAGEO RC0805FR-072K2L,RES 0805 2.2K Ohms 1% 1/8W,150-010400100-0095,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-072k2l-618134?s=YAGEO+RC0805FR-072K2L
+"R15, R16, R17, R18, R19, R20, R21, R22, R23, R24, R25, R26, R43, R44",14,Yes,330,YAGEO RC0805FR-07330RL,RES 0805 330 Ohms 1% 1/8W,150-010400100-0069,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/yageo-rc0805fr-07330rl-618145?s=YAGEO+RC0805FR-07330RL
+"R28, R34",2,Yes,44.2k,YAGEO RC0805FR-0744K2L,RES 0805 44.2K Ohms 1% 1/8W,-,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/panasoniceurope-erj6enf4422v-1159784?catSequenceId=194
+R27,1,Yes,470,YAGEO RC0805FR-07470RL,RES 0805 470 Ohms 1% 1/8W,150-010400100-0099,https://www.ozdisan.com/p/smt-smd-ve-cip-direncler-194/viking-crt05f7e4700-1054393
+"A1, (J3)",2,Yes,-,01x22 Female Verticle Pin Header,2 pieces of 1x22 female 2.54mm pitch connectors,N/A,-
+J2,1,No,-,WAGO 256-4xx,10 wide WAGO terminal block,N/A,-
+J1,1,Yes,-,02x20 Male Verticle Pin Header,1 piece 02x20 Male vertical pin header,N/A,-
+,,,,,,

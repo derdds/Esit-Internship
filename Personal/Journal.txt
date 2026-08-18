@@ -70,4 +70,54 @@ Absent on medical leave per physician recommendation for health recovery.
 06.08.26
 Initiated preliminary R&D for the secondary project (pedal-mounted bicycle power meter). Analyzed physical
 mounting constraints and structural stress zones. Evaluated candidate components including strain gauge
-configurations, instrumentation amplifiers, low-power ADCs, and wireless transceivers.s
+configurations, instrumentation amplifiers, low-power ADCs, and wireless transceivers.
+
+07.08.26
+Continued R&D on bicycle power meter architectures, evaluating crank-arm, spider, and pedal-based topologies.
+Focused on pedal-mounted configurations, mapping out rotational dynamic forces, angular velocity sensing via IMU,
+and low-noise differential Wheatstone bridge interfaces.
+
+08.08.26
+Conducted the first component selection for the analog front-end (AFE) and wireless subsystem. Compared low-noise precision
+instrumentation amplifiers, 24-bit delta-sigma ADCs, Time to Digital Converters (TDC), and ultra-low-power BLE SoC options to ensure long battery
+life and stable millivolt signal acquisition under dynamic load.
+
+10.08.26
+Analyzed mechanical stress distributions and strain gauge bonding techniques for aluminum pedal spindle geometry.
+Formulated temperature compensation strategies and digital filtering algorithms to counteract drift from ambient
+thermal gradients and mechanical fatigue.
+
+11.08.26
+Drafted power management architecture and battery charging subsystem for the power meter. Evaluated coin-cell
+versus Li-Po trade-offs versus Other Li-xx chemisteries, ultra-low-quiescent LDOs, and automatic sleep/wake states 
+triggered by onboard accelerometer motion interrupts.
+
+12.08.26
+Defined peripheral communication protocols and BLE transmission profiles (Cycling Power Profile - CPP).
+Outlined standard ANT+/BLE service characteristics and mapped data packet payloads for instantaneous cadence,
+torque effectiveness, and pedal smoothness metrics.
+
+13.08.26
+Initiated and completed the first full iteration of the bicycle power meter schematic. Integrated
+the Wheatstone bridge excitation circuitry, precision instrumentation amp, TDC, BLE SoC, power management,
+and crystal oscillators with complete ERC validation.
+
+14.08.26
+Started compiling the formal R&D research documentation for the bicycle power meter project. Documented theoretical
+calculations, component selection justifications, sensor calibration methodology, and preliminary power budget
+estimates across various operating modes.
+
+15.08.26
+Continued drafting the technical R&D report, focusing on firmware state-machine architecture and digital signal
+processing pipelines. Documented finite state machine logic for pairing, zero-offset calibration, real-time sampling,
+and power-saving routines.
+
+17.08.26
+Transitioned to physical PCB layout design for the power meter board. Placed components within tight mechanical
+constraints to fit inside the pedal spindle housing, routed sensitive analog differential pairs away from high-frequency
+switching lines, and established RF ground planes.
+
+18.08.26
+Arrived midday following an urgent family emergency. Researched potential PCB circuit optimizations and alternative
+IC substitutions for improved availability and lower noise floors. Concluded the day by auditing and finalizing the
+production Bill of Materials (BOM) for the KediSavar project.
