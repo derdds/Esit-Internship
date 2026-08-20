@@ -1,0 +1,103 @@
+(footprint "PWR Pins (2x2.54mm)"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "685444e5-d918-4757-8d1d-47a3a89e116b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "PWR Pins (2x2.54mm)"
+		(at -3.5 -2.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "40580003-3a06-4da8-925e-e7a4a5c46bf8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f5dbf5ce-75e5-485e-b949-8a1196cff942")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f2642d49-c6cb-4df1-8c0e-4c77bb74c21d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_text user "VDD"
+		(at -20.1 0 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "451528d0-d9de-4fe1-81e7-7f0d035ea4c1")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "GND"
+		(at -19.954423 2.41475 6.9)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "2abf628f-c8f3-42c9-9a3f-918e8124daea")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -21.1 0)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "f63cadc3-7f94-44f4-a72b-080316c27bc9")
+	)
+	(pad "2" thru_hole circle
+		(at -20.94718 2.534887 6.9)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "d7abd4c9-f1a7-414c-83f6-6af0252bdd87")
+	)
+	(embedded_fonts no)
+)

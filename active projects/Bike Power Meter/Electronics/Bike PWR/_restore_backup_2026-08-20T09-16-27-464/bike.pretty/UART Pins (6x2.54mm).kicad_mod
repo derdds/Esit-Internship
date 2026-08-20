@@ -1,0 +1,187 @@
+(footprint "UART Pins (6x2.54mm)"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "c9de3250-325b-449d-a6f7-c8eb7cca77a4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "UART Pins (6x2.54mm)"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b5d25e79-ec15-4681-b8b5-d38eeaa94ba8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f623efb7-dce8-40ec-89d8-fb066cd31544")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4a720421-b75a-4435-98ae-30e10c178bad")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_text user "VDD"
+		(at -20.1 0 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "8c79013f-cb97-4d7c-b2da-3e5957973577")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "IO"
+		(at -19.954423 2.41475 6.9)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "eff921c6-0a71-4d50-a46c-689eb34551dd")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "CLK"
+		(at -19.519799 4.794522 13.8)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "c36bf9b9-f229-47b7-a186-1059883673c7")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "Tx"
+		(at -18.802425 7.104844 20.7)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "242d113f-21b0-449a-82fc-6b96b22f9fae")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "Rx"
+		(at -17.812692 9.31225 27.6)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "29bd0921-151c-46eb-8a6a-0770addb4c48")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(fp_text user "GND"
+		(at -16.564936 11.384765 34.5)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "932afa67-f51c-4402-8f14-48660f490e6a")
+		(effects
+			(font
+				(size 0.75 0.75)
+				(thickness 0.15)
+			)
+			(justify left)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -21.1 0)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "95833718-1df8-40c4-8733-743c4b5cb5c1")
+	)
+	(pad "2" thru_hole circle
+		(at -20.94718 2.534887 6.9)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "f88a78dd-70f6-4174-ab42-bc60976f1836")
+	)
+	(pad "3" thru_hole circle
+		(at -20.490933 5.033056 13.8)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "fe1bfe39-71c1-4c5a-a77d-d38da9562e9c")
+	)
+	(pad "4" thru_hole circle
+		(at -19.737869 7.458319 20.7)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9536f31d-ee22-4fbe-87fb-9ff0af8f919c")
+	)
+	(pad "5" thru_hole circle
+		(at -18.698896 9.775546 27.6)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "efd724cc-66ef-43b2-bfa7-827676586a02")
+	)
+	(pad "6" thru_hole circle
+		(at -17.389063 11.951172 34.5)
+		(size 1.6 1.6)
+		(drill 0.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "179f521b-48ff-4558-8434-8fb3490a26fa")
+	)
+	(embedded_fonts no)
+)

@@ -1,1 +1,0 @@
-ok but wouldnt the mapping of the zero offset / temprature curve for it be increadibly hard to calibrate due to the now 2 dimensions of measurements that needs multiple postions to read the output and multiple temprature calibrations? software offset setting seems way easier on the development end
